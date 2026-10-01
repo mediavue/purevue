@@ -25,26 +25,27 @@ Open `index.html` in any browser to see it. It needs no install or build step.
 
 ## The redesign
 
-**Look.** Clean and bright like freshly cleaned glass. The two blues come straight from the
-PureVue logo, so the brand stays recognisable. Big, rounded headings echo the chunky letters
-in the logo. There's a dark mode for people whose phones are set to dark.
+**Look.** Night-blue and glassy at the top and bottom, bright in between. The two blues come
+straight from the PureVue logo, so the brand stays recognisable. Headings use Bricolage
+Grotesque, a bold, slightly quirky typeface with real personality; body text uses Figtree.
+Both fonts are stored with the site, so they always load and no visitor data goes to Google.
 
-**The hero: a window you can clean.** The first thing visitors see is a "dirty" window over a
-photo of the pole and water droplets. Dragging a finger or mouse across it wipes the grime
-away. It's memorable, it shows what the business does, and it works on touch screens.
+**The hero: rain on glass.** The top of the page is a dark window pane covered in water
+droplets, with a few drops slowly running down. It's drawn in code, so it stays sharp on every
+screen, pauses when scrolled away (saves battery) and stays still for visitors who turn off
+motion. The quote form sits right in the hero on a frosted-glass panel, so visitors can ask
+for a price without scrolling.
 
 **Page sections, in order:**
 
-1. Header with logo, menu and a phone button.
-2. Hero: headline, two buttons (free quote, call), three quick promises, the wipeable window.
-3. Promise strip: guarantee, monthly rounds, chemical free, Direct Debit.
-4. What's included every visit: frames/sills/doors, above conservatories, Georgian and leaded, cleaner for longer.
-5. How pure water cleaning works: three steps beside the real photo of the cleaner.
-6. The 100% guarantee in a bold blue band.
-7. Areas covered, with postcodes and a "check your postcode" box.
-8. Free quote form: name, contact, postcode, property type, how often, extras.
-9. Footer with contact details, Direct Debit link and privacy policy.
-10. On phones, a bar fixed to the bottom of the screen with **Call** and **Free quote**.
+1. Header that floats over the hero and turns solid as you scroll, with a phone button.
+2. Hero: headline, two buttons (free quote, call), three key facts (0 ppm pure water, 100% guarantee, monthly rounds) and the quote form.
+3. "Every visit" bento grid: the real photo of the cleaner, a big 0 ppm tile, frames/sills/doors, above conservatories, Georgian and leaded.
+4. How pure water cleaning works: Filter, Scrub, Rinse, plus the benefits of no ladders.
+5. The 100% guarantee as a big typographic statement.
+6. A scrolling ribbon of town names, then the towns with postcodes and a "check your postcode" box.
+7. Closing call-to-action with the phone number and Direct Debit link, then the footer.
+8. On phones, a bar fixed to the bottom of the screen with **Call** and **Free quote**.
 
 All the wording is rewritten from the current site's own claims. Nothing has been invented
 (no fake reviews, no prices).
@@ -59,14 +60,15 @@ The prototype is a single HTML file so it's easy to open and read. For the real 
 | Styling | Modern CSS (as in the prototype) or **Tailwind CSS v4** | No heavy theme or page builder. |
 | Hosting | **Cloudflare Pages** or **Netlify** | Free for a site this size, fast worldwide, automatic HTTPS, deploys every time you push to GitHub. |
 | Quote form | **Netlify Forms**, **Formspree** or a Cloudflare Worker | Sends form entries to `info@purevuewindows.co.uk` with no server to maintain. |
-| Images | WebP/AVIF, resized per screen | The photos in this prototype are already converted to WebP and are about 5x smaller. |
+| Images | WebP/AVIF, resized per screen | The photo in this prototype is already converted to WebP and is about 5x smaller than the original. |
+| Photography | New photos of real jobs | The current photos are low resolution. A few sharp landscape shots (clean house fronts, the van, before/after) would lift the whole site more than any code change. |
 | Payments | Keep the existing GoCardless link | Already works; no change needed. |
 | Local SEO | `LocalBusiness` structured data (included in the prototype), a Google Business Profile, a page per town | Helps PureVue show up in Google Maps and local searches. |
 
-Modern browser features already used in the prototype: OKLCH colours, `color-mix()`,
-the `:has()` selector, scroll-driven animations (with a fallback), automatic dark mode,
-`backdrop-filter` for the frosted-glass header, and a `<canvas>` for the wipe effect.
-Motion is switched off for visitors who ask their device for reduced motion.
+Modern browser features already used in the prototype: `backdrop-filter` frosted glass,
+the `:has()` selector, variable fonts, a `<canvas>` animation, automatic dark mode for the
+light sections, and structured business data for Google. Motion is switched off for visitors
+who ask their device for reduced motion.
 
 ## Before going live
 

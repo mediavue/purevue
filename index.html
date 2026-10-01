@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PureVue Window Cleaning</title>
 <meta name="description" content="Pure water window cleaning in Braintree, Dunmow, Haverhill, Halstead and nearby. Frames, sills and doors cleaned every visit. 100% re-clean guarantee.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<meta name="theme-color" content="#071330">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -16,64 +14,67 @@
   "telephone": "+447507677222",
   "email": "info@purevuewindows.co.uk",
   "url": "https://purevuewindows.co.uk",
-  "areaServed": ["Braintree", "Rayne", "Dunmow", "Stansted", "Haverhill", "Halstead", "Steeple Bumpstead", "Sturmer"],
+  "areaServed": ["Braintree", "Rayne", "Great Dunmow", "Stansted", "Haverhill", "Halstead", "Steeple Bumpstead", "Sturmer"],
   "sameAs": ["https://www.facebook.com/PureVueWindows"]
 }
 </script>
 <style>
-/* Layout: one column of "panes". Glass-clear white ground, the logo's royal blue and
-   cyan as the only accents, a squeegee-wipe hero you can actually wipe. */
+/* Fonts are stored with the site (faster, and no visitor data sent to Google). */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("assets/fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("assets/fonts/figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+/* Layout: a night-blue "rain on glass" hero with the quote form in it, then light
+   sections built like window panes (bento grid), closing on navy again. */
 :root {
-  --ground: oklch(98.6% 0.006 240);
-  --pane: oklch(100% 0 0);
-  --ink: oklch(24% 0.04 255);
-  --ink-soft: oklch(45% 0.03 250);
-  --line: oklch(90% 0.02 240);
-  --royal: oklch(53% 0.24 262);      /* logo "P" blue */
-  --cyan: oklch(70% 0.12 222);       /* logo "ure vue" cyan */
-  --cyan-wash: oklch(95% 0.035 222);
-  --on-royal: oklch(100% 0 0);
-  --logo-chip: transparent;
+  --navy: #071330;
+  --navy-2: #0d1f4a;
+  --royal: #1a5cff;      /* the "P" in the logo */
+  --cyan: #1fb0dc;       /* "ure vue" in the logo */
+  --glass: rgb(255 255 255 / 0.08);
+  --glass-line: rgb(255 255 255 / 0.16);
 
-  --f-display: "Unbounded", "Arial Rounded MT Bold", system-ui, sans-serif;
-  --f-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* Light-section tokens (switch in dark mode) */
+  --bg: #f3f7fc;
+  --surface: #ffffff;
+  --ink: #0a1633;
+  --muted: #4f5d7a;
+  --line: #dde5f0;
+  --tile-royal-ink: #ffffff;
 
-  --step-0: 1rem;
-  --step-1: 1.2rem;
-  --step-2: clamp(1.4rem, 1.1rem + 1.2vw, 1.85rem);
-  --step-3: clamp(1.9rem, 1.3rem + 2.6vw, 3rem);
-  --step-4: clamp(2.3rem, 1.4rem + 4.2vw, 4.4rem);
-  --radius: 1.25rem;
-  --max: 72rem;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --max: 76rem;
+  --r-lg: 1.75rem;
+  --r-md: 1.1rem;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ground: oklch(17% 0.03 255);
-    --pane: oklch(22% 0.035 255);
-    --ink: oklch(95% 0.01 240);
-    --ink-soft: oklch(76% 0.03 240);
-    --line: oklch(32% 0.04 255);
-    --royal: oklch(66% 0.19 262);
-    --cyan: oklch(78% 0.11 222);
-    --cyan-wash: oklch(26% 0.05 240);
-    --on-royal: oklch(16% 0.03 255);
-    --logo-chip: oklch(100% 0 0);
+    --bg: #081534;
+    --surface: #0f2152;
+    --ink: #eef3fb;
+    --muted: #a9b7d3;
+    --line: #1f336a;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --ground: oklch(17% 0.03 255);
-  --pane: oklch(22% 0.035 255);
-  --ink: oklch(95% 0.01 240);
-  --ink-soft: oklch(76% 0.03 240);
-  --line: oklch(32% 0.04 255);
-  --royal: oklch(66% 0.19 262);
-  --cyan: oklch(78% 0.11 222);
-  --cyan-wash: oklch(26% 0.05 240);
-  --on-royal: oklch(16% 0.03 255);
-  --logo-chip: oklch(100% 0 0);
+  --bg: #081534;
+  --surface: #0f2152;
+  --ink: #eef3fb;
+  --muted: #a9b7d3;
+  --line: #1f336a;
   color-scheme: dark;
 }
 
@@ -81,255 +82,272 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--ground);
+  background: var(--bg);
   color: var(--ink);
-  font: 400 var(--step-0)/1.6 var(--f-body);
+  font: 400 1.0625rem/1.6 var(--f-body);
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
-h1, h2, h3 { font-family: var(--f-display); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; }
 p { margin: 0; text-wrap: pretty; }
-
-.wrap { width: min(100% - 2rem, var(--max)); margin-inline: auto; }
-.eyebrow {
-  font: 500 0.78rem/1 var(--f-mono);
-  letter-spacing: 0.12em;
+:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; border-radius: 8px; }
+.wrap { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
+.label {
+  font: 600 0.8rem/1 var(--f-body);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--royal);
 }
 
-/* Buttons */
+/* ---------- Buttons ---------- */
 .btn {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 0.9rem 1.4rem;
-  border-radius: 999px;
-  font: 600 1rem/1 var(--f-body);
-  text-decoration: none;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform .15s ease, background-color .15s ease;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 1rem 1.6rem; border-radius: 999px; border: 0;
+  font: 650 1rem/1 var(--f-body); text-decoration: none; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.btn:hover { transform: translateY(-2px); }
-.btn-primary { background: var(--royal); color: var(--on-royal); }
-.btn-ghost { border-color: var(--line); background: var(--pane); color: var(--ink); }
-.btn svg { width: 1.1em; height: 1.1em; }
+.btn svg { width: 1.1em; height: 1.1em; flex: none; }
+.btn-royal { background: var(--royal); color: #fff; box-shadow: 0 10px 30px -10px rgb(26 92 255 / 0.8); }
+.btn-royal:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgb(26 92 255 / 0.9); }
+.btn-glass { background: var(--glass); color: #fff; border: 1px solid var(--glass-line); backdrop-filter: blur(10px); }
+.btn-glass:hover { background: rgb(255 255 255 / 0.14); }
+.btn-white { background: #fff; color: var(--navy); }
+.btn-white:hover { transform: translateY(-2px); }
 
-/* Header */
+/* ---------- Header ---------- */
 .site-header {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-  background: color-mix(in oklch, var(--ground) 82%, transparent);
-  backdrop-filter: blur(14px) saturate(1.4);
-  border-bottom: 1px solid var(--line);
+  position: fixed; inset: 0 0 auto; z-index: 40;
+  padding-top: env(safe-area-inset-top, 0px);
+  transition: background-color .3s ease, box-shadow .3s ease;
 }
-.site-header .wrap { display: flex; align-items: center; gap: 1.5rem; padding-block: 0.7rem; }
-.logo { display: block; background: var(--logo-chip); border-radius: 0.6rem; padding: 0.2rem 0.4rem; }
-.logo img { height: 2.9rem; width: auto; }
-.nav { display: flex; gap: 1.4rem; margin-left: auto; }
-.nav a { text-decoration: none; font-weight: 500; color: var(--ink-soft); }
-.nav a:hover { color: var(--royal); }
-.header-call { font-family: var(--f-mono); font-size: 0.95rem; }
-@media (max-width: 52rem) { .nav { display: none; } .header-call { margin-left: auto; } }
-@media (max-width: 26rem) { .header-call .num { display: none; } }
+.site-header.scrolled { background: rgb(7 19 48 / 0.82); backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 1px 0 var(--glass-line); }
+.site-header .wrap { display: flex; align-items: center; gap: 2rem; padding-block: 1rem; }
+.brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #fff; }
+.brand img { height: 2.6rem; width: auto; }
+.brand span { font: 600 0.72rem/1.2 var(--f-body); letter-spacing: 0.18em; text-transform: uppercase; color: rgb(255 255 255 / 0.7); }
+.nav { display: flex; gap: 1.75rem; margin-left: auto; }
+.nav a { color: rgb(255 255 255 / 0.78); text-decoration: none; font-weight: 500; font-size: 0.97rem; }
+.nav a:hover { color: #fff; }
+.site-header .btn { padding: 0.75rem 1.2rem; font-size: 0.95rem; }
+@media (max-width: 60rem) { .nav { display: none; } .site-header .btn { margin-left: auto; } }
+@media (max-width: 30rem) { .brand span { display: none; } .site-header .btn .num { display: none; } }
 
-/* Hero */
-.hero { padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem); }
-.hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-.hero h1 { font-size: var(--step-4); font-weight: 800; margin-block: 1rem 1.25rem; }
-.hero h1 .pure { color: var(--royal); }
-.hero h1 .water { color: var(--cyan); }
-.hero .lede { font-size: var(--step-1); color: var(--ink-soft); max-width: 34rem; }
-.hero .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
-.hero .facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 2rem 0 0; padding: 0; list-style: none; color: var(--ink-soft); font-size: 0.95rem; }
-.hero .facts li { display: flex; align-items: center; gap: 0.45rem; }
-.hero .facts svg { width: 1.1rem; height: 1.1rem; color: var(--cyan); flex: none; }
-@media (max-width: 52rem) { .hero .wrap { grid-template-columns: 1fr; } }
-
-/* The wipeable window */
-.window {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  max-width: 100%;
-  border-radius: 1.6rem;
-  overflow: hidden;
-  border: 10px solid var(--pane);
-  box-shadow: 0 0 0 1px var(--line), 0 30px 60px -30px oklch(40% 0.15 260 / 0.45);
-  background: var(--cyan-wash);
-  touch-action: none;
-  cursor: crosshair;
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(60rem 40rem at 85% 110%, rgb(26 92 255 / 0.55), transparent 60%),
+    radial-gradient(40rem 30rem at 10% -10%, rgb(31 176 220 / 0.28), transparent 60%),
+    linear-gradient(180deg, #06102a 0%, var(--navy) 55%, #0a1c4a 100%);
+  padding-block: calc(7.5rem + env(safe-area-inset-top, 0px)) 4.5rem;
 }
-.window img, .window canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.window .mullion { position: absolute; inset: 0; pointer-events: none; }
-.window .mullion::before, .window .mullion::after { content: ""; position: absolute; background: var(--pane); }
-.window .mullion::before { left: 50%; top: 0; bottom: 0; width: 8px; translate: -50% 0; }
-.window .mullion::after { top: 46%; left: 0; right: 0; height: 8px; }
-.window .tag {
-  position: absolute; left: 1rem; bottom: 1rem; z-index: 2;
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0.5rem 0.8rem; border-radius: 999px;
-  background: var(--pane); color: var(--ink);
-  font: 500 0.8rem/1 var(--f-mono);
-  pointer-events: none;
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.55rem; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(8px);
+  font-size: 0.9rem; color: rgb(255 255 255 / 0.9);
 }
-.window .tag b { color: var(--royal); font-weight: 500; }
-.window-caption { margin-top: 0.8rem; font-size: 0.85rem; color: var(--ink-soft); text-align: center; }
-
-/* Promise strip */
-.strip { border-block: 1px solid var(--line); background: var(--pane); }
-.strip ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; list-style: none; margin-block: 0; padding: 1.4rem 0; }
-.strip li { display: flex; gap: 0.8rem; align-items: flex-start; min-width: 0; }
-.strip svg { width: 1.6rem; height: 1.6rem; flex: none; color: var(--royal); }
-.strip b { display: block; font-weight: 600; }
-.strip span { font-size: 0.9rem; color: var(--ink-soft); }
-@media (max-width: 60rem) { .strip ul { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 30rem) { .strip ul { grid-template-columns: 1fr; } }
-
-/* Sections */
-section.block { padding-block: clamp(3.5rem, 8vw, 6rem); }
-.block-head { max-width: 40rem; margin-bottom: 2.5rem; display: grid; gap: 0.9rem; }
-.block-head h2 { font-size: var(--step-3); font-weight: 700; }
-.block-head p { color: var(--ink-soft); font-size: var(--step-1); }
-
-/* Every visit checklist */
-.included { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
-.included article {
-  background: var(--pane); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.5rem; display: grid; gap: 0.5rem; align-content: start;
+.pill .dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #3ee08f; box-shadow: 0 0 0 4px rgb(62 224 143 / 0.2); }
+.hero h1 {
+  font-size: clamp(2.9rem, 1.6rem + 5.6vw, 6.2rem);
+  font-weight: 800;
+  margin-block: 1.4rem 1.5rem;
 }
-.included h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
-.included p { color: var(--ink-soft); font-size: 0.95rem; }
-.included .tick {
-  width: 2.2rem; height: 2.2rem; border-radius: 50%; display: grid; place-items: center;
-  background: var(--cyan-wash); color: var(--royal); margin-bottom: 0.4rem;
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(100deg, #7fdcff 0%, var(--cyan) 40%, #5d8bff 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.included .tick svg { width: 1.2rem; height: 1.2rem; }
+.hero .lede { font-size: clamp(1.08rem, 1rem + 0.4vw, 1.3rem); color: rgb(255 255 255 / 0.78); max-width: 36rem; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2.25rem; }
+.stats { display: flex; flex-wrap: wrap; gap: 1rem 2.75rem; margin: 3rem 0 0; padding: 1.75rem 0 0; border-top: 1px solid var(--glass-line); list-style: none; }
+.stats b { display: block; font: 750 2rem/1 var(--f-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 0.9rem; color: rgb(255 255 255 / 0.65); }
 
-/* Pure water process */
-.process { background: var(--cyan-wash); }
-.process .wrap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-.process figure { margin: 0; }
-.process figure img { border-radius: var(--radius); width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-.process figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.6rem; }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; counter-reset: step; }
-.steps li { display: grid; grid-template-columns: auto 1fr; gap: 1rem; counter-increment: step; }
-.steps li::before {
-  content: counter(step);
-  width: 2.6rem; height: 2.6rem; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--royal); color: var(--on-royal);
-  font: 700 1rem/1 var(--f-display);
+/* Quote card: a frosted pane of glass */
+.quote-card {
+  background: rgb(255 255 255 / 0.09);
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-lg);
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  backdrop-filter: blur(22px) saturate(1.5);
+  box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.18);
 }
-.steps h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
-.steps p { color: var(--ink-soft); }
-.reading {
-  display: inline-flex; align-items: baseline; gap: 0.4rem; margin-top: 0.5rem;
-  font-family: var(--f-mono); padding: 0.35rem 0.7rem; border-radius: 0.5rem;
-  background: var(--pane); border: 1px solid var(--line); font-size: 0.85rem;
+.quote-card h2 { font-size: 1.7rem; font-weight: 750; }
+.quote-card > p { color: rgb(255 255 255 / 0.7); margin-top: 0.4rem; font-size: 0.97rem; }
+.quote-card form { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.q-field { display: grid; gap: 0.45rem; min-width: 0; }
+.q-field > label, .q-field > .q-legend { font-size: 0.85rem; font-weight: 600; color: rgb(255 255 255 / 0.85); }
+.quote-card input, .quote-card select {
+  width: 100%; font: inherit; font-size: 1rem; color: #fff;
+  padding: 0.85rem 1rem; border-radius: 0.85rem;
+  background: rgb(4 12 34 / 0.45); border: 1px solid var(--glass-line);
 }
-.reading b { font-size: 1.2rem; color: var(--royal); font-weight: 500; font-variant-numeric: tabular-nums; }
-@media (max-width: 52rem) { .process .wrap { grid-template-columns: 1fr; } .process figure { max-width: 26rem; } }
+.quote-card input::placeholder { color: rgb(255 255 255 / 0.45); }
+.quote-card select option { color: #0a1633; }
+.quote-card input:focus, .quote-card select:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgb(31 176 220 / 0.3); }
+.segmented { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35rem; padding: 0.3rem; border-radius: 0.95rem; background: rgb(4 12 34 / 0.45); border: 1px solid var(--glass-line); }
+.segmented label { position: relative; text-align: center; padding: 0.6rem 0.2rem; border-radius: 0.7rem; font-size: 0.88rem; font-weight: 600; cursor: pointer; color: rgb(255 255 255 / 0.75); }
+.segmented input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.segmented label:has(input:checked) { background: #fff; color: var(--navy); }
+.segmented label:has(input:focus-visible) { outline: 2px solid var(--cyan); }
+.q-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.quote-card .btn { width: 100%; margin-top: 0.25rem; padding-block: 1.1rem; }
+.q-note { font-size: 0.8rem; color: rgb(255 255 255 / 0.55); text-align: center; }
+.q-status { padding: 0.9rem 1rem; border-radius: 0.85rem; background: rgb(62 224 143 / 0.14); border: 1px solid rgb(62 224 143 / 0.4); font-size: 0.92rem; }
 
-/* Guarantee */
-.guarantee .wrap {
-  background: var(--royal); color: var(--on-royal);
-  border-radius: 1.75rem; padding: clamp(2rem, 5vw, 3.5rem);
-  display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center;
-}
-.guarantee .big { font: 800 clamp(3rem, 2rem + 4vw, 5.5rem)/0.9 var(--f-display); letter-spacing: -0.04em; }
-.guarantee h2 { font-size: var(--step-2); margin-bottom: 0.6rem; }
-.guarantee p { opacity: 0.9; max-width: 36rem; }
-.guarantee .btn { background: var(--on-royal); color: var(--royal); }
-@media (max-width: 52rem) { .guarantee .wrap { grid-template-columns: 1fr; } }
+@media (max-width: 62rem) { .hero .wrap { grid-template-columns: minmax(0, 1fr); } .quote-card { max-width: 34rem; } }
+@media (max-width: 26rem) { .q-row { grid-template-columns: 1fr; } .segmented { grid-template-columns: repeat(2, 1fr); } }
 
-/* Areas */
-.areas .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-.towns { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; margin: 0; padding: 0; }
-.towns li {
-  padding: 0.6rem 1rem; border-radius: 999px;
-  background: var(--pane); border: 1px solid var(--line); font-weight: 500;
-}
-.towns li span { font: 500 0.75rem/1 var(--f-mono); color: var(--ink-soft); margin-left: 0.35rem; }
-.postcode-check { margin-top: 2rem; display: grid; gap: 0.6rem; max-width: 26rem; }
-.postcode-check .row { display: flex; gap: 0.5rem; }
-.postcode-check output { font-size: 0.95rem; min-height: 1.6em; color: var(--ink-soft); }
-@media (max-width: 52rem) { .areas .wrap { grid-template-columns: 1fr; } }
+/* ---------- Section scaffolding ---------- */
+.section { padding-block: clamp(4.5rem, 10vw, 8rem); }
+.section-head { display: grid; gap: 1rem; max-width: 44rem; margin-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+.section-head h2 { font-size: clamp(2.2rem, 1.4rem + 3.4vw, 4rem); font-weight: 780; }
+.section-head p { font-size: 1.15rem; color: var(--muted); max-width: 36rem; }
 
-/* Forms */
-label { font-weight: 600; font-size: 0.92rem; }
-input, select, textarea {
-  width: 100%; font: inherit; color: var(--ink);
-  padding: 0.8rem 1rem; border-radius: 0.8rem;
-  border: 1.5px solid var(--line); background: var(--pane);
+/* ---------- Bento: every visit ---------- */
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(15rem, auto); gap: 1rem; }
+.tile {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-lg); padding: 1.75rem;
+  background: var(--surface); border: 1px solid var(--line);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
+  min-width: 0;
 }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--royal); }
-.quote { background: var(--pane); border: 1px solid var(--line); border-radius: 1.75rem; padding: clamp(1.5rem, 4vw, 2.5rem); }
-.quote form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; }
-.quote .field { display: grid; gap: 0.4rem; min-width: 0; }
-.quote .full { grid-column: 1 / -1; }
-.quote fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
-.quote legend { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.4rem; }
-.choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.choices label {
-  font-weight: 500; padding: 0.55rem 1rem; border-radius: 999px;
-  border: 1.5px solid var(--line); cursor: pointer; background: var(--ground);
+.tile h3 { font-size: 1.5rem; font-weight: 720; letter-spacing: -0.025em; }
+.tile p { color: var(--muted); margin-top: 0.5rem; }
+.tile .icon { width: 3rem; height: 3rem; border-radius: 0.9rem; display: grid; place-items: center; background: var(--bg); color: var(--royal); }
+.tile .icon svg { width: 1.5rem; height: 1.5rem; }
+
+.tile-photo { grid-column: span 2; grid-row: span 2; padding: 0; border: 0; background: var(--navy); }
+.tile-photo img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%;
+  transform: scale(1.3); transform-origin: 62% 58%; /* hides the curved frame baked into the original photo */
 }
-.choices input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.choices label:has(input:checked) { border-color: var(--royal); background: var(--cyan-wash); color: var(--royal); }
-.choices label:has(input:focus-visible) { outline: 3px solid var(--cyan); outline-offset: 2px; }
-.form-note { font-size: 0.88rem; color: var(--ink-soft); }
-.form-status { grid-column: 1 / -1; padding: 1rem 1.2rem; border-radius: 0.9rem; background: var(--cyan-wash); }
-@media (max-width: 40rem) { .quote form { grid-template-columns: 1fr; } }
+.tile-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgb(7 19 48 / 0.92)); }
+.tile-photo .caption { position: absolute; left: 1.75rem; right: 1.75rem; bottom: 1.75rem; z-index: 1; color: #fff; }
+.tile-photo .caption h3 { font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.3rem); }
+.tile-photo .caption p { color: rgb(255 255 255 / 0.78); max-width: 26rem; }
 
-/* Footer */
-footer { border-top: 1px solid var(--line); padding-block: 3rem 6rem; color: var(--ink-soft); font-size: 0.95rem; }
-footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2rem; }
-footer h3 { font: 600 0.8rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.9rem; }
-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
-footer .legal { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.85rem; }
-@media (max-width: 44rem) { footer .wrap { grid-template-columns: 1fr; } }
+.tile-royal { background: var(--royal); border-color: transparent; color: #fff; }
+.tile-royal p { color: rgb(255 255 255 / 0.82); }
+.tile-royal .icon { background: rgb(255 255 255 / 0.16); color: #fff; }
+.tile-ppm .reading { font: 800 clamp(4rem, 3rem + 3vw, 5.6rem)/0.85 var(--f-display); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+.tile-ppm .reading small { font-size: 0.32em; letter-spacing: 0; font-weight: 650; margin-left: 0.25rem; opacity: 0.85; }
 
-/* Mobile action bar */
+@media (max-width: 62rem) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tile-photo { grid-row: span 1; min-height: 26rem; } }
+@media (max-width: 36rem) { .bento { grid-template-columns: 1fr; } .tile-photo { grid-column: auto; min-height: 30rem; } .bento { grid-auto-rows: auto; } }
+
+/* ---------- How it works (navy) ---------- */
+.how { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+.how::before { content: ""; position: absolute; inset: auto -20% -60% 30%; height: 40rem; background: radial-gradient(closest-side, rgb(26 92 255 / 0.35), transparent); pointer-events: none; }
+.how .section-head p { color: rgb(255 255 255 / 0.7); }
+.how .label { color: var(--cyan); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; position: relative; }
+.steps li { border-top: 1px solid var(--glass-line); padding-top: 1.75rem; display: grid; gap: 0.75rem; align-content: start; }
+.steps .n { font: 800 4.5rem/0.8 var(--f-display); letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.35); }
+.steps h3 { font-size: 1.6rem; font-weight: 720; }
+.steps p { color: rgb(255 255 255 / 0.7); }
+.no-ladder { margin-top: clamp(3rem, 6vw, 4.5rem); display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.no-ladder span { padding: 0.65rem 1.1rem; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-line); font-size: 0.95rem; }
+@media (max-width: 52rem) { .steps { grid-template-columns: 1fr; gap: 2rem; } }
+
+/* ---------- Guarantee ---------- */
+.guarantee .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.guarantee .big {
+  font: 800 clamp(6rem, 3rem + 12vw, 13rem)/0.8 var(--f-display); letter-spacing: -0.06em;
+  background: linear-gradient(160deg, var(--cyan), var(--royal));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.guarantee h2 { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.4rem); font-weight: 780; }
+.guarantee p { color: var(--muted); font-size: 1.15rem; margin-top: 1rem; max-width: 34rem; }
+.guarantee .btn { margin-top: 2rem; }
+@media (max-width: 48rem) { .guarantee .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Areas ---------- */
+.ticker { background: var(--royal); color: #fff; overflow: hidden; padding-block: 1.25rem; }
+.ticker-track { display: flex; width: max-content; animation: ticker 40s linear infinite; }
+.ticker-track span { font: 750 clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem)/1 var(--f-display); letter-spacing: -0.03em; padding-inline: 1.5rem; white-space: nowrap; }
+.ticker-track span::after { content: "•"; margin-left: 3rem; color: rgb(255 255 255 / 0.45); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+.areas .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+.towns { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.towns li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 0.25rem; border-bottom: 1px solid var(--line); font-weight: 600; font-size: 1.1rem; }
+.towns li:nth-child(odd) { padding-right: 1.5rem; }
+.towns li:nth-child(even) { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+.towns small { color: var(--muted); font-weight: 500; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.checker { margin-top: 2.25rem; padding: 1.5rem; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); display: grid; gap: 0.75rem; }
+.checker label { font-weight: 650; }
+.checker .row { display: flex; gap: 0.5rem; }
+.checker input { flex: 1; min-width: 0; font: inherit; color: var(--ink); padding: 0.85rem 1.1rem; border-radius: 999px; border: 1.5px solid var(--line); background: var(--bg); text-transform: uppercase; }
+.checker input::placeholder { text-transform: none; }
+.checker input:focus { outline: none; border-color: var(--royal); }
+.checker output { color: var(--muted); min-height: 1.6em; }
+@media (max-width: 52rem) { .areas .wrap { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 26rem) { .towns { grid-template-columns: 1fr; } .towns li:nth-child(n) { padding-inline: 0.25rem; border-left: 0; } }
+
+/* ---------- Closing CTA + footer ---------- */
+.closing { background: var(--navy); color: #fff; padding-block: clamp(4.5rem, 10vw, 7rem) 2.5rem; }
+.cta-panel {
+  border-radius: 2rem; padding: clamp(2rem, 6vw, 4rem);
+  background: radial-gradient(40rem 20rem at 100% 0%, rgb(31 176 220 / 0.45), transparent 60%), linear-gradient(135deg, var(--royal), #0b3fd6);
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 2rem; align-items: end;
+}
+.cta-panel h2 { font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4.2rem); font-weight: 800; }
+.cta-panel .phone { display: block; margin-top: 1rem; font: 750 clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem)/1 var(--f-display); letter-spacing: -0.02em; text-decoration: none; font-variant-numeric: tabular-nums; }
+.cta-panel .side { display: grid; gap: 0.8rem; justify-items: start; }
+.cta-panel .side p { color: rgb(255 255 255 / 0.85); }
+@media (max-width: 52rem) { .cta-panel { grid-template-columns: minmax(0, 1fr); } }
+
+footer { margin-top: 4rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem; color: rgb(255 255 255 / 0.7); font-size: 0.95rem; }
+footer img { height: 2.4rem; width: auto; margin-bottom: 1rem; }
+footer h3 { font: 650 0.78rem/1 var(--f-body); letter-spacing: 0.14em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
+footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+footer a { text-decoration: none; }
+footer a:hover { color: #fff; }
+footer .legal { grid-column: 1 / -1; padding-top: 1.75rem; border-top: 1px solid var(--glass-line); font-size: 0.85rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+@media (max-width: 44rem) { footer { grid-template-columns: 1fr; } }
+
+/* ---------- Phone action bar ---------- */
 .action-bar { display: none; }
 @media (max-width: 44rem) {
   .action-bar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
-    padding: 0.6rem 1rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
-    background: color-mix(in oklch, var(--ground) 88%, transparent);
-    backdrop-filter: blur(14px);
-    border-top: 1px solid var(--line);
+    position: fixed; inset: auto 0 0; z-index: 50;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 0.5rem;
+    padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    background: rgb(7 19 48 / 0.88); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--glass-line);
   }
-  .action-bar .btn { justify-content: center; }
+  .closing { padding-bottom: 6rem; }
 }
 
-/* Gentle scroll-in for sections, only where the browser supports scroll-driven animation */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
-    @keyframes rise { from { opacity: 0.35; translate: 0 1.5rem; } to { opacity: 1; translate: 0 0; } }
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .ticker-track { animation: none; }
   .btn { transition: none; }
 }
 </style>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" id="header">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="PureVue Window Cleaning, home">
-      <img src="assets/img/logo.png" alt="PureVue window cleaning services" width="600" height="400">
+    <a class="brand" href="#top" aria-label="PureVue Window Cleaning, home">
+      <img src="assets/img/logo-mark-transparent.png" alt="PureVue" width="560" height="262">
+      <span>Window<br>Cleaning</span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a href="#included">What's included</a>
-      <a href="#pure-water">Pure water</a>
+      <a href="#every-visit">Every visit</a>
+      <a href="#how">Pure water</a>
       <a href="#areas">Areas</a>
       <a href="https://pay.gocardless.com/AL00043BTKEPB8" rel="noopener">Pay by Direct Debit</a>
     </nav>
-    <a class="btn btn-primary header-call" href="tel:07507677222">
+    <a class="btn btn-glass" href="tel:07507677222">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
       <span class="num">075 076 77 222</span>
     </a>
@@ -338,160 +356,188 @@ footer .legal { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid 
 
 <main id="top">
 
+  <!-- HERO -->
   <section class="hero">
+    <canvas id="rain" aria-hidden="true"></canvas>
     <div class="wrap">
       <div>
-        <p class="eyebrow">Window cleaner · Essex &amp; Suffolk</p>
-        <h1>Streak-free windows with nothing but <span class="pure">pure</span> <span class="water">water.</span></h1>
-        <p class="lede">Regular monthly window cleaning for homes in Braintree, Dunmow, Haverhill, Halstead and the villages in between. Frames, sills and doors included every visit.</p>
+        <span class="pill"><span class="dot"></span>Local window cleaner for Essex &amp; Suffolk</span>
+        <h1>Crystal clear windows. Just <em>pure water.</em></h1>
+        <p class="lede">Monthly window cleaning for homes in Braintree, Dunmow, Haverhill, Halstead and the villages in between. Frames, sills and doors included, every visit.</p>
         <div class="ctas">
-          <a class="btn btn-primary" href="#quote">Get a free quote</a>
-          <a class="btn btn-ghost" href="tel:07507677222">Call 075 076 77 222</a>
+          <a class="btn btn-royal" href="#quote">Get my free quote</a>
+          <a class="btn btn-glass" href="tel:07507677222">Call 075 076 77 222</a>
         </div>
-        <ul class="facts">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>100% re-clean guarantee</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No ladders, no chemicals</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Pay by Direct Debit</li>
+        <ul class="stats">
+          <li><b>0 ppm</b><span>Pure water, nothing added</span></li>
+          <li><b>100%</b><span>Re-clean guarantee</span></li>
+          <li><b>Monthly</b><span>Regular rounds</span></li>
         </ul>
       </div>
 
-      <div>
-        <div class="window" id="window" role="img" aria-label="A window with water droplets. Drag across it to wipe away the grime.">
-          <img src="assets/img/pole-and-droplets.webp" alt="" width="900" height="1349">
-          <canvas id="grime" aria-hidden="true"></canvas>
-          <div class="mullion"></div>
-          <div class="tag">Water purity <b>0 ppm</b></div>
-        </div>
-        <p class="window-caption">Drag across the glass to give it a clean.</p>
-      </div>
+      <aside class="quote-card" id="quote" aria-labelledby="quote-title">
+        <h2 id="quote-title">Get a free quote</h2>
+        <p>Tell us a little about your home and we'll text you a price.</p>
+        <form id="quote-form">
+          <div class="q-field">
+            <span class="q-legend" id="prop-legend">Property</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="prop-legend">
+              <label><input type="radio" name="property" id="p-flat" value="Flat">Flat</label>
+              <label><input type="radio" name="property" id="p-terrace" value="Terrace">Terrace</label>
+              <label><input type="radio" name="property" id="p-semi" value="Semi" checked>Semi</label>
+              <label><input type="radio" name="property" id="p-detached" value="Detached">Detached</label>
+            </div>
+          </div>
+          <div class="q-row">
+            <div class="q-field">
+              <label for="q-postcode">Postcode</label>
+              <input id="q-postcode" name="postcode" autocomplete="postal-code" placeholder="CM7 1AB" required>
+            </div>
+            <div class="q-field">
+              <label for="q-frequency">How often</label>
+              <select id="q-frequency" name="frequency">
+                <option>Every 4 weeks</option>
+                <option>Every 8 weeks</option>
+                <option>One-off clean</option>
+              </select>
+            </div>
+          </div>
+          <div class="q-field">
+            <label for="q-phone">Mobile number</label>
+            <input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="07…" required>
+          </div>
+          <button class="btn btn-royal" type="submit">Send my quote request</button>
+          <p class="q-note">No obligation. We only use your number to reply.</p>
+          <div class="q-status" id="quote-status" role="status" hidden></div>
+        </form>
+      </aside>
     </div>
   </section>
 
-  <div class="strip">
-    <ul class="wrap">
-      <li>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-        <div><b>Guaranteed work</b><span>Not happy? We come back free.</span></div>
-      </li>
-      <li>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <div><b>Monthly rounds</b><span>Same cleaner, regular visits.</span></div>
-      </li>
-      <li>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2.7S6 9.3 6 14a6 6 0 0 0 12 0c0-4.7-6-11.3-6-11.3z"/></svg>
-        <div><b>Chemical free</b><span>Safe for children, pets and plants.</span></div>
-      </li>
-      <li>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-        <div><b>Easy payment</b><span>Set up Direct Debit in a minute.</span></div>
-      </li>
-    </ul>
-  </div>
-
-  <section class="block reveal" id="included">
+  <!-- EVERY VISIT -->
+  <section class="section" id="every-visit">
     <div class="wrap">
-      <div class="block-head">
-        <p class="eyebrow">Every visit</p>
-        <h2>More than just the glass</h2>
-        <p>Each clean covers the whole window, so your house looks finished from the street.</p>
+      <div class="section-head">
+        <span class="label">Every visit, as standard</span>
+        <h2>We clean the whole window, not just the glass.</h2>
       </div>
-      <div class="included">
-        <article>
-          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Frames, sills and doors</h3>
-          <p>Cleaned on every visit as standard, not charged as an extra.</p>
+      <div class="bento">
+        <figure class="tile tile-photo" style="margin:0">
+          <img src="assets/img/cleaner-at-work.webp" alt="PureVue window cleaner scrubbing a window with a water-fed pole" width="1000" height="1153" loading="lazy">
+          <figcaption class="caption">
+            <h3>Cleaned from the ground. No ladders.</h3>
+            <p>A soft brush on a long pole reaches heights and angles a ladder can't.</p>
+          </figcaption>
+        </figure>
+        <article class="tile tile-royal tile-ppm">
+          <div class="reading">0<small>ppm</small></div>
+          <div>
+            <h3>Pure water only</h3>
+            <p>Filtered until no minerals are left, so it dries without spots.</p>
+          </div>
         </article>
-        <article>
-          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Above conservatories</h3>
-          <p>The pole reaches windows over conservatories and extensions, so none get missed.</p>
+        <article class="tile">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/></svg></div>
+          <div>
+            <h3>Frames, sills and doors</h3>
+            <p>Every visit, never charged as an extra.</p>
+          </div>
         </article>
-        <article>
-          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Georgian and leaded</h3>
-          <p>Small panes and lead lines get the same careful, streak-free finish.</p>
+        <article class="tile">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
+          <div>
+            <h3>Above conservatories</h3>
+            <p>Windows over extensions and conservatories don't get skipped.</p>
+          </div>
         </article>
-        <article>
-          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Cleaner for longer</h3>
-          <p>With no soap left behind, there's no sticky film for dirt to cling to.</p>
+        <article class="tile">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 9h16M4 15h16M9.3 3v18M14.7 3v18"/></svg></div>
+          <div>
+            <h3>Georgian and leaded</h3>
+            <p>Small panes get the same careful, streak-free finish.</p>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="block process reveal" id="pure-water">
+  <!-- HOW IT WORKS -->
+  <section class="section how" id="how">
     <div class="wrap">
-      <figure>
-        <img src="assets/img/cleaner-at-work.webp" alt="PureVue window cleaner using a water-fed pole on a ground floor window" width="800" height="923" loading="lazy">
-        <figcaption>Cleaning from the ground with a water-fed pole.</figcaption>
-      </figure>
-      <div>
-        <div class="block-head">
-          <p class="eyebrow">How pure water cleaning works</p>
-          <h2>Why we left the ladder behind</h2>
-        </div>
-        <ol class="steps">
-          <li>
-            <div>
-              <h3>Filter the water</h3>
-              <p>Tap water is filtered until every mineral is gone. Pure water dries without leaving spots or streaks.</p>
-              <span class="reading">Purity reading <b>000</b> ppm</span>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3>Scrub from the ground</h3>
-              <p>A soft brush on a long pole scrubs glass and frames at heights and angles a ladder can't reach. Nobody walks on your roof tiles.</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3>Rinse and leave to dry</h3>
-              <p>A final rinse carries the dirt away. No ladder marks on the lawn, no damage to the sills.</p>
-            </div>
-          </li>
-        </ol>
+      <div class="section-head">
+        <span class="label">How pure water cleaning works</span>
+        <h2>Cleaner windows that stay clean for longer.</h2>
+        <p>No soap means no sticky film left behind for dirt to cling to.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n" aria-hidden="true">01</span>
+          <h3>Filter</h3>
+          <p>Tap water is filtered until every mineral is gone. Pure water dries clear, without spots or streaks.</p>
+        </li>
+        <li>
+          <span class="n" aria-hidden="true">02</span>
+          <h3>Scrub</h3>
+          <p>We scrub the glass and frames from the ground with a soft brush on a water-fed pole.</p>
+        </li>
+        <li>
+          <span class="n" aria-hidden="true">03</span>
+          <h3>Rinse</h3>
+          <p>A final rinse carries the dirt away. The windows dry naturally to a clear finish.</p>
+        </li>
+      </ol>
+      <div class="no-ladder" aria-label="Benefits of not using ladders">
+        <span>No ladder marks on your lawn</span>
+        <span>No one walking on your roof tiles</span>
+        <span>No damage to window ledges</span>
+        <span>No chemicals near children, pets or plants</span>
       </div>
     </div>
   </section>
 
-  <section class="block guarantee reveal">
+  <!-- GUARANTEE -->
+  <section class="section guarantee">
     <div class="wrap">
       <div class="big" aria-hidden="true">100%</div>
       <div>
-        <h2>We guarantee our work</h2>
-        <p>If you're not happy with the clean, tell us and we'll come back and do it again for free.</p>
+        <span class="label">Our guarantee</span>
+        <h2 style="margin-top:1rem">Not happy? We'll come back and clean again, free.</h2>
+        <p>If any window isn't up to standard, tell us. We'll return and put it right at no cost.</p>
+        <a class="btn btn-royal" href="#quote">Book your first clean</a>
       </div>
-      <a class="btn" href="#quote">Book a clean</a>
     </div>
   </section>
 
-  <section class="block areas reveal" id="areas">
+  <!-- AREAS -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Braintree</span><span>Rayne</span><span>Great Dunmow</span><span>Stansted</span><span>Halstead</span><span>Haverhill</span><span>Steeple Bumpstead</span><span>Sturmer</span>
+      <span>Braintree</span><span>Rayne</span><span>Great Dunmow</span><span>Stansted</span><span>Halstead</span><span>Haverhill</span><span>Steeple Bumpstead</span><span>Sturmer</span>
+    </div>
+  </div>
+  <section class="section areas" id="areas">
     <div class="wrap">
-      <div>
-        <div class="block-head">
-          <p class="eyebrow">Areas we cover</p>
-          <h2>Local to north Essex and south Suffolk</h2>
-          <p>We run regular rounds in these towns and villages. Close by but not listed? Ask us anyway.</p>
-        </div>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="label">Areas we cover</span>
+        <h2>On your street, every month.</h2>
+        <p>We run regular rounds across north Essex and south Suffolk. Nearby but not listed? Ask us anyway.</p>
       </div>
       <div>
         <ul class="towns">
-          <li>Braintree <span>CM7</span></li>
-          <li>Rayne <span>CM77</span></li>
-          <li>Great Dunmow <span>CM6</span></li>
-          <li>Stansted <span>CM24</span></li>
-          <li>Halstead <span>CO9</span></li>
-          <li>Haverhill <span>CB9</span></li>
-          <li>Steeple Bumpstead <span>CB9</span></li>
-          <li>Sturmer <span>CB9</span></li>
+          <li>Braintree <small>CM7</small></li>
+          <li>Rayne <small>CM77</small></li>
+          <li>Great Dunmow <small>CM6</small></li>
+          <li>Stansted <small>CM24</small></li>
+          <li>Halstead <small>CO9</small></li>
+          <li>Haverhill <small>CB9</small></li>
+          <li>Steeple Bumpstead <small>CB9</small></li>
+          <li>Sturmer <small>CB9</small></li>
         </ul>
-        <form class="postcode-check" id="postcode-form">
-          <label for="postcode">Check your postcode</label>
+        <form class="checker" id="postcode-form">
+          <label for="postcode">Are you on our round?</label>
           <div class="row">
-            <input id="postcode" name="postcode" autocomplete="postal-code" placeholder="e.g. CM7 1AB" required>
-            <button class="btn btn-primary" type="submit">Check</button>
+            <input id="postcode" name="postcode" autocomplete="postal-code" placeholder="Enter your postcode" required>
+            <button class="btn btn-royal" type="submit">Check</button>
           </div>
           <output id="postcode-result" for="postcode" aria-live="polite"></output>
         </form>
@@ -499,193 +545,205 @@ footer .legal { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid 
     </div>
   </section>
 
-  <section class="block reveal" id="quote">
+  <!-- CLOSING -->
+  <section class="closing">
     <div class="wrap">
-      <div class="block-head">
-        <p class="eyebrow">Free quote</p>
-        <h2>Tell us about your home</h2>
-        <p>We'll reply with a price, usually the same day. Prefer to talk? Call or text 075 076 77 222.</p>
+      <div class="cta-panel">
+        <div>
+          <h2>Ready for clear windows?</h2>
+          <a class="phone" href="tel:07507677222">075 076 77 222</a>
+        </div>
+        <div class="side">
+          <p>Call, text or email for a free quote. Already a customer? Set up Direct Debit in a minute.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.6rem">
+            <a class="btn btn-white" href="#quote">Get a quote</a>
+            <a class="btn btn-glass" href="https://pay.gocardless.com/AL00043BTKEPB8" rel="noopener">Set up Direct Debit</a>
+          </div>
+        </div>
       </div>
-      <div class="quote">
-        <form id="quote-form">
-          <div class="field">
-            <label for="q-name">Your name</label>
-            <input id="q-name" name="name" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="q-phone">Phone or email</label>
-            <input id="q-phone" name="contact" autocomplete="tel" required>
-          </div>
-          <div class="field">
-            <label for="q-postcode">Postcode</label>
-            <input id="q-postcode" name="postcode" autocomplete="postal-code" required>
-          </div>
-          <div class="field">
-            <label for="q-type">Property</label>
-            <select id="q-type" name="property">
-              <option>Terraced house</option>
-              <option selected>Semi-detached house</option>
-              <option>Detached house</option>
-              <option>Bungalow</option>
-              <option>Flat</option>
-              <option>Business premises</option>
-            </select>
-          </div>
-          <fieldset class="full">
-            <legend>How often?</legend>
-            <div class="choices">
-              <label><input type="radio" name="frequency" id="f-4" value="Every 4 weeks" checked> Every 4 weeks</label>
-              <label><input type="radio" name="frequency" id="f-8" value="Every 8 weeks"> Every 8 weeks</label>
-              <label><input type="radio" name="frequency" id="f-once" value="One-off clean"> One-off clean</label>
-            </div>
-          </fieldset>
-          <fieldset class="full">
-            <legend>Anything extra?</legend>
-            <div class="choices">
-              <label><input type="checkbox" name="extras" id="x-conservatory" value="Conservatory"> Conservatory</label>
-              <label><input type="checkbox" name="extras" id="x-georgian" value="Georgian or leaded windows"> Georgian or leaded windows</label>
-              <label><input type="checkbox" name="extras" id="x-skylights" value="Skylights"> Skylights</label>
-            </div>
-          </fieldset>
-          <div class="field full">
-            <label for="q-notes">Notes (optional)</label>
-            <textarea id="q-notes" name="notes" rows="3" placeholder="Side gate code, best day to call, number of windows…"></textarea>
-          </div>
-          <div class="full" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-            <button class="btn btn-primary" type="submit">Send my quote request</button>
-            <p class="form-note">We only use your details to reply to you.</p>
-          </div>
-          <div class="form-status" id="quote-status" role="status" hidden></div>
-        </form>
-      </div>
+
+      <footer>
+        <div>
+          <img src="assets/img/logo-mark-transparent.png" alt="PureVue" width="560" height="262" loading="lazy">
+          <p>Pure water window cleaning for homes and businesses across north Essex and south Suffolk.</p>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="tel:07507677222">075 076 77 222</a></li>
+            <li><a href="mailto:info@purevuewindows.co.uk">info@purevuewindows.co.uk</a></li>
+            <li><a href="https://www.facebook.com/PureVueWindows" rel="noopener">Facebook</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Customers</h3>
+          <ul>
+            <li><a href="https://pay.gocardless.com/AL00043BTKEPB8" rel="noopener">Set up Direct Debit</a></li>
+            <li><a href="#quote">Get a quote</a></li>
+            <li><a href="/privacy-policy">Privacy policy</a></li>
+          </ul>
+        </div>
+        <div class="legal">
+          <span>© <span id="year">2026</span> PureVue Window Cleaning</span>
+          <span>Website by MediaVue</span>
+        </div>
+      </footer>
     </div>
   </section>
-
 </main>
 
-<footer>
-  <div class="wrap">
-    <div>
-      <h3>PureVue Window Cleaning</h3>
-      <p>Pure water window cleaning for homes and businesses across north Essex and south Suffolk.</p>
-    </div>
-    <div>
-      <h3>Contact</h3>
-      <ul>
-        <li><a href="tel:07507677222">075 076 77 222</a></li>
-        <li><a href="mailto:info@purevuewindows.co.uk">info@purevuewindows.co.uk</a></li>
-        <li><a href="https://www.facebook.com/PureVueWindows" rel="noopener">Facebook</a></li>
-      </ul>
-    </div>
-    <div>
-      <h3>Customers</h3>
-      <ul>
-        <li><a href="https://pay.gocardless.com/AL00043BTKEPB8" rel="noopener">Set up Direct Debit</a></li>
-        <li><a href="#quote">Get a quote</a></li>
-        <li><a href="/privacy-policy">Privacy policy</a></li>
-      </ul>
-    </div>
-    <p class="legal">© <span id="year">2026</span> PureVue Window Cleaning. Website by MediaVue.</p>
-  </div>
-</footer>
-
 <div class="action-bar">
-  <a class="btn btn-ghost" href="tel:07507677222">Call</a>
-  <a class="btn btn-primary" href="#quote">Free quote</a>
+  <a class="btn btn-glass" href="tel:07507677222">Call</a>
+  <a class="btn btn-royal" href="#quote">Free quote</a>
 </div>
 
 <script>
-// ---- Wipe-to-clean window ----
+// ---------- Rain on glass (hero background) ----------
+// Draws water droplets sitting on a window. A few bigger drops slowly run down
+// the glass. Everything is drawn in code, so it stays sharp on any screen.
 (function () {
-  const box = document.getElementById("window");
-  const canvas = document.getElementById("grime");
+  const canvas = document.getElementById("rain");
   const ctx = canvas.getContext("2d");
-  let w = 0, h = 0, last = null;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let width, height, drops = [], runners = [], running = true;
 
-  // Paint a soft, speckled film of dirt over the glass.
-  function paintGrime() {
-    const r = box.getBoundingClientRect();
+  // Simple repeatable random numbers, so the pattern looks the same each load.
+  let seed = 11;
+  const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+  function makeDrop(x, y, r) {
+    return { x, y, r, stretch: 1 + random() * 0.25 };
+  }
+
+  function setup() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = r.width; h = r.height;
-    canvas.width = w * dpr; canvas.height = h * dpr;
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "rgba(214, 210, 198, 0.82)";
-    ctx.fillRect(0, 0, w, h);
-    let seed = 7;
-    const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    for (let i = 0; i < 900; i++) {
-      ctx.fillStyle = `rgba(${120 + rand() * 50}, ${105 + rand() * 40}, ${80 + rand() * 30}, ${rand() * 0.3})`;
+
+    seed = 11;
+    drops = [];
+    const count = Math.round((width * height) / 2600);
+    for (let i = 0; i < count; i++) {
+      // Mostly tiny drops, with the odd larger one
+      const r = random() < 0.92 ? 0.8 + random() * 2.6 : 4 + random() * 6;
+      drops.push(makeDrop(random() * width, random() * height, r));
+    }
+    runners = [];
+    for (let i = 0; i < Math.max(4, Math.round(width / 160)); i++) {
+      runners.push({ x: random() * width, y: random() * height, r: 5 + random() * 4, speed: 0.15 + random() * 0.5, trail: [] });
+    }
+  }
+
+  function drawDrop(x, y, r, stretch) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(1, stretch);
+    // Body: dark lower rim, bright upper rim, like light bending through water
+    const body = ctx.createRadialGradient(-r * 0.25, -r * 0.35, r * 0.1, 0, 0, r);
+    body.addColorStop(0, "rgba(180, 225, 255, 0.10)");
+    body.addColorStop(0.7, "rgba(120, 180, 255, 0.10)");
+    body.addColorStop(1, "rgba(200, 235, 255, 0.45)");
+    ctx.fillStyle = body;
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fill();
+    // Shadow under the drop
+    ctx.strokeStyle = "rgba(0, 8, 30, 0.35)";
+    ctx.lineWidth = Math.max(0.6, r * 0.18);
+    ctx.beginPath();
+    ctx.arc(0, r * 0.08, r * 0.92, Math.PI * 0.15, Math.PI * 0.85);
+    ctx.stroke();
+    // Highlight
+    if (r > 1.6) {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
       ctx.beginPath();
-      ctx.arc(rand() * w, rand() * h, rand() * 9 + 1, 0, Math.PI * 2);
+      ctx.ellipse(-r * 0.35, -r * 0.4, r * 0.22, r * 0.14, -0.6, 0, Math.PI * 2);
       ctx.fill();
     }
-    // Start with one clean stripe so the effect is obvious before anyone touches it.
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.lineCap = "round";
-    ctx.lineWidth = Math.max(48, w * 0.16);
-    ctx.beginPath();
-    ctx.moveTo(w * 0.12, h * 0.18);
-    ctx.bezierCurveTo(w * 0.7, h * 0.12, w * 0.2, h * 0.55, w * 0.85, h * 0.62);
-    ctx.stroke();
+    ctx.restore();
   }
 
-  function wipe(x, y) {
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.lineCap = "round";
-    ctx.lineWidth = Math.max(40, w * 0.14);
-    ctx.beginPath();
-    ctx.moveTo(last ? last.x : x, last ? last.y : y);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    last = { x, y };
+  function frame() {
+    ctx.clearRect(0, 0, width, height);
+    for (const d of drops) drawDrop(d.x, d.y, d.r, d.stretch);
+
+    for (const run of runners) {
+      if (!reduceMotion) {
+        // Drops on glass move in small, uneven bursts
+        run.y += run.speed * (0.4 + Math.random() * 1.6);
+        run.x += (Math.random() - 0.5) * 0.3;
+        if (Math.random() < 0.04) run.trail.push({ x: run.x + (Math.random() - 0.5) * 2, y: run.y - run.r, r: 0.8 + Math.random() * 1.4 });
+        if (run.trail.length > 40) run.trail.shift();
+        if (run.y - run.r > height) {
+          run.y = -20; run.x = Math.random() * width; run.trail = [];
+        }
+      }
+      // A faint wiped path where the drop has run
+      ctx.strokeStyle = "rgba(160, 210, 255, 0.06)";
+      ctx.lineWidth = run.r * 1.2;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(run.x, Math.max(0, run.y - 140));
+      ctx.lineTo(run.x, run.y);
+      ctx.stroke();
+      for (const t of run.trail) drawDrop(t.x, t.y, t.r, 1.1);
+      drawDrop(run.x, run.y, run.r, 1.25);
+    }
+    if (!reduceMotion && running) requestAnimationFrame(frame);
   }
 
-  function point(e) {
-    const r = canvas.getBoundingClientRect();
-    return { x: e.clientX - r.left, y: e.clientY - r.top };
-  }
+  setup();
+  frame();
+  new ResizeObserver(() => { setup(); if (reduceMotion || !running) frame(); }).observe(canvas);
 
-  box.addEventListener("pointerdown", e => { box.setPointerCapture(e.pointerId); last = null; const p = point(e); wipe(p.x, p.y); });
-  box.addEventListener("pointermove", e => { if (e.buttons || e.pointerType === "mouse") { const p = point(e); wipe(p.x, p.y); } });
-  box.addEventListener("pointerleave", () => { last = null; });
-  box.addEventListener("pointerup", () => { last = null; });
-
-  new ResizeObserver(paintGrime).observe(box);
+  // Pause the animation when the hero is scrolled out of view (saves battery)
+  new IntersectionObserver(([entry]) => {
+    const wasRunning = running;
+    running = entry.isIntersecting;
+    if (running && !wasRunning && !reduceMotion) requestAnimationFrame(frame);
+  }).observe(canvas);
 })();
 
-// ---- Postcode checker ----
+// ---------- Header turns solid after scrolling ----------
+(function () {
+  const header = document.getElementById("header");
+  const update = () => header.classList.toggle("scrolled", window.scrollY > 40);
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+})();
+
+// ---------- Postcode checker ----------
 (function () {
   const covered = ["CM6", "CM7", "CM77", "CM24", "CB9", "CO9"];
   const form = document.getElementById("postcode-form");
-  const out = document.getElementById("postcode-result");
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  const result = document.getElementById("postcode-result");
+  form.addEventListener("submit", event => {
+    event.preventDefault();
     const raw = document.getElementById("postcode").value.toUpperCase().replace(/\s+/g, "");
-    const outward = raw.length > 4 ? raw.slice(0, -3) : raw;
-    if (!/^[A-Z]{1,2}\d/.test(outward)) {
-      out.textContent = "That doesn't look like a UK postcode. Try something like CM7 1AB.";
-    } else if (covered.includes(outward)) {
-      out.textContent = `Good news, ${outward} is on our round. Ask for a free quote below.`;
+    const area = raw.length > 4 ? raw.slice(0, -3) : raw;   // "CM71AB" -> "CM7"
+    if (!/^[A-Z]{1,2}\d/.test(area)) {
+      result.textContent = "That doesn't look like a UK postcode. Try something like CM7 1AB.";
+    } else if (covered.includes(area)) {
+      result.textContent = `Yes, ${area} is on our round. Get a free quote at the top of the page.`;
     } else {
-      out.textContent = `${outward} isn't on our regular round yet, but call or text us and we'll see what we can do.`;
+      result.textContent = `${area} isn't on a regular round yet, but call or text and we'll see what we can do.`;
     }
   });
 })();
 
-// ---- Quote form (prototype: shows a summary, sends nothing) ----
+// ---------- Quote form (prototype: shows a summary, sends nothing) ----------
 (function () {
   const form = document.getElementById("quote-form");
   const status = document.getElementById("quote-status");
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  form.addEventListener("submit", event => {
+    event.preventDefault();
     const data = new FormData(form);
-    const extras = data.getAll("extras");
     status.hidden = false;
-    status.textContent =
-      `Prototype only, nothing has been sent. The live site would send: ${data.get("name")}, ` +
-      `${data.get("property").toLowerCase()} in ${data.get("postcode").toUpperCase()}, ` +
-      `${data.get("frequency").toLowerCase()}${extras.length ? ", plus " + extras.join(", ").toLowerCase() : ""}.`;
+    status.textContent = `Prototype only, nothing was sent. The live site would send: ${data.get("property")} in ` +
+      `${data.get("postcode").toUpperCase()}, ${data.get("frequency").toLowerCase()}, reply to ${data.get("phone")}.`;
   });
   document.getElementById("year").textContent = new Date().getFullYear();
 })();
