@@ -61,7 +61,7 @@ The prototype is a single HTML file so it's easy to open and read. For the real 
 | Hosting | **Cloudflare Pages** or **Netlify** | Free for a site this size, fast worldwide, automatic HTTPS, deploys every time you push to GitHub. |
 | Quote form | **Netlify Forms**, **Formspree** or a Cloudflare Worker | Sends form entries to `info@purevuewindows.co.uk` with no server to maintain. |
 | Images | WebP/AVIF, resized per screen | The photo in this prototype is already converted to WebP and is about 5x smaller than the original. |
-| Photography | New photos of real jobs | The current photos are low resolution. A few sharp landscape shots (clean house fronts, the van, before/after) would lift the whole site more than any code change. |
+| Photography | Real photos of real jobs | The prototype now uses 7 AI-generated images (see below) as stand-ins. Before launch, replace them with real photos of PureVue jobs, the van and before/after shots. |
 | Payments | Keep the existing GoCardless link | Already works; no change needed. |
 | Local SEO | `LocalBusiness` structured data (included in the prototype), a Google Business Profile, a page per town | Helps PureVue show up in Google Maps and local searches. |
 
@@ -70,12 +70,29 @@ the `:has()` selector, variable fonts, a `<canvas>` animation, automatic dark mo
 light sections, and structured business data for Google. Motion is switched off for visitors
 who ask their device for reduced motion.
 
+## Images
+
+| File | Source | Used for |
+| --- | --- | --- |
+| `cleaner-at-work.webp` | Real photo from the current site | Large "Cleaned from the ground" tile |
+| `logo.png`, `logo-mark-transparent.png` | Current PureVue logo | Header and footer |
+| `conservatory.webp` | AI-generated (GPT Image 2.5 via Higgsfield) | "Above conservatories" tile |
+| `georgian-window.webp` | AI-generated | "Georgian and leaded" tile |
+| `purity-meter.webp` | AI-generated | Step 1, Filter |
+| `brush-on-glass.webp` | AI-generated | Step 2, Scrub |
+| `rinse.webp` | AI-generated | Step 3, Rinse |
+| `house-front.webp` | AI-generated | Guarantee section |
+| `high-street.webp` | AI-generated | Areas banner |
+
+The AI images show general scenes only (no people, no named places), so they don't claim to be
+PureVue's own work. They're fine as placeholders, but real photos of real jobs build more trust.
+
 ## Before going live
 
 - [ ] Confirm the correct phone number (`07507 677222` vs `07889 868568`).
 - [ ] Connect the quote form to a real form service (it currently only shows a summary on screen).
 - [ ] Ask existing customers for Google reviews and add a reviews section.
-- [ ] Add a couple of before/after photos from real jobs.
+- [ ] Replace the AI-generated images with real photos of PureVue jobs where possible.
 - [ ] Decide whether to show starting prices (e.g. "from £X for a 3-bed semi").
 - [ ] Keep or move the privacy policy page (the footer links to `/privacy-policy`).
 - [ ] Set up redirects from old WordPress URLs (`/contact`, `/payments`) so Google links keep working.
