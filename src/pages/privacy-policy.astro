@@ -1,0 +1,69 @@
+---
+import Base from "../layouts/Base.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { business } from "../data/business";
+// TODO: have the business owner review this policy before going live.
+---
+
+<Base
+  title="Privacy policy | PureVue Window Cleaning"
+  description="How PureVue Window Cleaning collects, uses and protects your personal information."
+>
+  <PageIntro label="Privacy policy" title="How we look after your information">
+    <p>We only collect what we need to quote for, carry out and get paid for your window cleaning.</p>
+  </PageIntro>
+
+  <section class="section">
+    <div class="wrap prose">
+      <p class="updated">Last updated: October 2026</p>
+
+      <h2>Who we are</h2>
+      <p>{business.name} provides window cleaning in north Essex and south Suffolk. We are responsible for the personal information described here. You can contact us at <a href={`mailto:${business.email}`}>{business.email}</a> or on <a href={business.phoneLink}>{business.phoneDisplay}</a>.</p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Quote requests:</strong> your name, mobile number, postcode, property type and how often you'd like your windows cleaned.</li>
+        <li><strong>Customers:</strong> your name, address, phone number, email address (if you give it) and your cleaning and payment history.</li>
+        <li><strong>Messages:</strong> anything you send us by phone, text, email or Facebook.</li>
+      </ul>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To reply to your quote request and arrange cleans.</li>
+        <li>To let you know when we're due, or if we need to change a visit.</li>
+        <li>To take payment and keep the records the law requires.</li>
+      </ul>
+      <p>We never sell your information or use it for marketing by other companies.</p>
+
+      <h2>Our legal reasons</h2>
+      <p>We use your information to take steps you've asked for before agreeing a service (your quote), to carry out our agreement with you (your cleans), and to meet legal duties such as keeping accounts.</p>
+
+      <h2>Who we share it with</h2>
+      <ul>
+        <li><strong>GoCardless</strong>, if you pay by Direct Debit. GoCardless handles your bank details; we never see your full account number. See the <a href="https://gocardless.com/privacy/" rel="noopener">GoCardless privacy notice</a>.</li>
+        <li><strong>Netlify</strong>, the company that hosts this website and receives quote requests sent through it.</li>
+        <li>Our accountant, for keeping business accounts.</li>
+      </ul>
+
+      <h2>How long we keep it</h2>
+      <p>If you ask for a quote but don't become a customer, we delete your details within 12 months. For customers, we keep records while you use us and for up to six years afterwards, because HMRC requires financial records to be kept.</p>
+
+      <h2>Cookies</h2>
+      <p>This website doesn't use advertising or tracking cookies.</p>
+
+      <h2>Your rights</h2>
+      <p>You can ask us for a copy of the information we hold about you, ask us to correct it, or ask us to delete it. Contact us using the details above. If you're unhappy with how we've handled your information, you can complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose { max-width: 46rem; }
+  .prose h2 { font-size: 1.6rem; font-weight: 750; margin: 2.5rem 0 0.75rem; }
+  .prose p, .prose li { color: var(--muted); }
+  .prose p + p, .prose ul + p { margin-top: 0.75rem; }
+  .prose ul { padding-left: 1.2rem; display: grid; gap: 0.5rem; margin: 0; }
+  .prose strong { color: var(--ink); }
+  .prose a { color: var(--royal); }
+  .updated { font-size: 0.9rem; }
+</style>

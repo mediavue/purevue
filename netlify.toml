@@ -1,0 +1,62 @@
+# Netlify settings: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# ---- Redirects from the old WordPress site, so old links and Google results keep working ----
+
+[[redirects]]
+  from = "/contact"
+  to = "/#quote"
+  status = 301
+
+[[redirects]]
+  from = "/contact/"
+  to = "/#quote"
+  status = 301
+
+# The old "Payments" page no longer exists, so send people straight to GoCardless
+[[redirects]]
+  from = "/payments"
+  to = "https://pay.gocardless.com/AL00043BTKEPB8"
+  status = 302
+
+[[redirects]]
+  from = "/payments/"
+  to = "https://pay.gocardless.com/AL00043BTKEPB8"
+  status = 302
+
+[[redirects]]
+  from = "/feed/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/comments/feed/*"
+  to = "/"
+  status = 301
+
+# ---- Headers ----
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Files with a content hash in their name never change, so browsers can keep them for a year
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

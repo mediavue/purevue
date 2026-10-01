@@ -1,0 +1,128 @@
+---
+import { Picture } from "astro:assets";
+import cleanerAtWork from "../assets/images/cleaner-at-work.jpg";
+import conservatory from "../assets/images/conservatory.jpg";
+import georgianWindow from "../assets/images/georgian-window.jpg";
+import type { ImageOutputFormat } from "astro";
+
+const formats: ImageOutputFormat[] = ["avif", "webp"];
+---
+
+<section class="section" id="every-visit">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Every visit, as standard</span>
+      <h2>We clean the whole window, not just the glass.</h2>
+    </div>
+    <div class="bento">
+      <figure class="tile tile-photo">
+        <Picture
+          src={cleanerAtWork}
+          formats={formats}
+          widths={[480, 800, 1000]}
+          sizes="(max-width: 36rem) 100vw, (max-width: 62rem) 100vw, 40rem"
+          alt="PureVue window cleaner scrubbing a window with a water-fed pole"
+        />
+        <figcaption class="caption">
+          <h3>Cleaned from the ground. No ladders.</h3>
+          <p>A soft brush on a long pole reaches heights and angles a ladder can't.</p>
+        </figcaption>
+      </figure>
+
+      <article class="tile tile-royal tile-ppm">
+        <div class="reading">0<small>ppm</small></div>
+        <div>
+          <h3>Pure water only</h3>
+          <p>Filtered until no minerals are left, so it dries without spots.</p>
+        </div>
+      </article>
+
+      <article class="tile tile-img">
+        <Picture
+          src={conservatory}
+          formats={formats}
+          widths={[400, 700, 1000]}
+          sizes="(max-width: 36rem) 100vw, (max-width: 62rem) 50vw, 20rem"
+          alt="White conservatory with clean, sparkling glass"
+        />
+        <div>
+          <h3>Above conservatories</h3>
+          <p>Windows over extensions and conservatories don't get skipped.</p>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/></svg>
+        </div>
+        <div>
+          <h3>Frames, sills and doors</h3>
+          <p>Every visit, never charged as an extra.</p>
+        </div>
+      </article>
+
+      <article class="tile tile-img">
+        <Picture
+          src={georgianWindow}
+          formats={formats}
+          widths={[400, 700, 1000]}
+          sizes="(max-width: 36rem) 100vw, (max-width: 62rem) 50vw, 20rem"
+          alt="Georgian sash window with small panes, framed by climbing roses"
+        />
+        <div>
+          <h3>Georgian and leaded</h3>
+          <p>Small panes get the same careful, streak-free finish.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(15rem, auto); gap: 1rem; }
+  .tile {
+    position: relative; overflow: hidden; margin: 0;
+    border-radius: var(--r-lg); padding: 1.75rem;
+    background: var(--surface); border: 1px solid var(--line);
+    display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
+    min-width: 0;
+  }
+  .tile h3 { font-size: 1.5rem; font-weight: 720; letter-spacing: -0.025em; }
+  .tile p { color: var(--muted); margin-top: 0.5rem; }
+  .icon { width: 3rem; height: 3rem; border-radius: 0.9rem; display: grid; place-items: center; background: var(--bg); color: var(--royal); }
+  .icon svg { width: 1.5rem; height: 1.5rem; }
+
+  /* Big photo of the cleaner */
+  .tile-photo { grid-column: span 2; grid-row: span 2; padding: 0; border: 0; background: var(--navy); }
+  .tile-photo :global(img) {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%;
+    transform: scale(1.3); transform-origin: 62% 58%; /* hides the curved frame baked into the original photo */
+  }
+  .tile-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgb(7 19 48 / 0.92)); }
+  .caption { position: absolute; left: 1.75rem; right: 1.75rem; bottom: 1.75rem; z-index: 1; color: #fff; }
+  .caption h3 { font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.3rem); }
+  .caption p { color: rgb(255 255 255 / 0.78); max-width: 26rem; }
+
+  /* Photo tiles: picture fills the tile, text sits on a dark fade at the bottom */
+  .tile-img { padding: 0; border: 0; background: var(--navy); color: #fff; justify-content: flex-end; min-height: 15rem; }
+  .tile-img :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .tile-img:hover :global(img) { transform: scale(1.04); }
+  .tile-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgb(7 19 48 / 0.55) 55%, rgb(7 19 48 / 0.92)); }
+  .tile-img > div { position: relative; z-index: 1; padding: 1.75rem; }
+  .tile-img p { color: rgb(255 255 255 / 0.8); }
+
+  .tile-royal { background: var(--royal); border-color: transparent; color: #fff; }
+  .tile-royal p { color: rgb(255 255 255 / 0.82); }
+  .reading { font: 800 clamp(4rem, 3rem + 3vw, 5.6rem)/0.85 var(--f-display); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+  .reading small { font-size: 0.32em; letter-spacing: 0; font-weight: 650; margin-left: 0.25rem; opacity: 0.85; }
+
+  @media (max-width: 62rem) {
+    .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tile-photo { grid-row: span 1; min-height: 26rem; }
+  }
+  @media (max-width: 36rem) {
+    .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    .tile-photo { grid-column: auto; min-height: 30rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tile-img :global(img) { transition: none; } }
+</style>

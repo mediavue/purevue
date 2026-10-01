@@ -1,0 +1,87 @@
+---
+// Quote request form. Netlify Forms collects the answers and emails them to you
+// (turn on email notifications in Netlify: Site configuration > Notifications > Form submissions).
+---
+
+<aside class="quote-card" id="quote" aria-labelledby="quote-title">
+  <h2 id="quote-title">Get a free quote</h2>
+  <p>Tell us a little about your home and we'll text you a price.</p>
+  <form name="quote" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="company">
+    <input type="hidden" name="form-name" value="quote" />
+    <!-- Spam trap: hidden from people, bots fill it in and get ignored -->
+    <p class="visually-hidden" aria-hidden="true">
+      <label>Leave this empty <input name="company" tabindex="-1" autocomplete="off" /></label>
+    </p>
+
+    <div class="field">
+      <span class="legend" id="property-legend">Property</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="property-legend">
+        <label><input type="radio" name="property" value="Flat" />Flat</label>
+        <label><input type="radio" name="property" value="Terrace" />Terrace</label>
+        <label><input type="radio" name="property" value="Semi" checked />Semi</label>
+        <label><input type="radio" name="property" value="Detached" />Detached</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="q-postcode">Postcode</label>
+        <input id="q-postcode" name="postcode" autocomplete="postal-code" placeholder="CM7 1AB" required />
+      </div>
+      <div class="field">
+        <label for="q-frequency">How often</label>
+        <select id="q-frequency" name="frequency">
+          <option>Every 4 weeks</option>
+          <option>Every 8 weeks</option>
+          <option>One-off clean</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="q-name">Your name</label>
+        <input id="q-name" name="name" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="q-phone">Mobile number</label>
+        <input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="07…" required />
+      </div>
+    </div>
+    <button class="btn btn-royal" type="submit">Send my quote request</button>
+    <p class="note">No obligation. We only use your details to reply. <a href="/privacy-policy/">Privacy policy</a></p>
+  </form>
+</aside>
+
+<style>
+  .quote-card {
+    background: rgb(255 255 255 / 0.09);
+    border: 1px solid var(--glass-line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+    backdrop-filter: blur(22px) saturate(1.5);
+    box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.18);
+    color: #fff;
+  }
+  h2 { font-size: 1.7rem; font-weight: 750; }
+  .quote-card > p { color: rgb(255 255 255 / 0.7); margin-top: 0.4rem; font-size: 0.97rem; }
+  form { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  .field { display: grid; gap: 0.45rem; min-width: 0; }
+  .field > label, .legend { font-size: 0.85rem; font-weight: 600; color: rgb(255 255 255 / 0.85); }
+  input, select {
+    width: 100%; font: inherit; font-size: 1rem; color: #fff;
+    padding: 0.85rem 1rem; border-radius: 0.85rem;
+    background: rgb(4 12 34 / 0.45); border: 1px solid var(--glass-line);
+  }
+  input::placeholder { color: rgb(255 255 255 / 0.45); }
+  select option { color: #0a1633; }
+  input:focus, select:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgb(31 176 220 / 0.3); }
+  .segmented { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35rem; padding: 0.3rem; border-radius: 0.95rem; background: rgb(4 12 34 / 0.45); border: 1px solid var(--glass-line); }
+  .segmented label { position: relative; text-align: center; padding: 0.6rem 0.2rem; border-radius: 0.7rem; font-size: 0.88rem; font-weight: 600; cursor: pointer; color: rgb(255 255 255 / 0.75); }
+  .segmented input { position: absolute; opacity: 0; inset: 0; cursor: pointer; padding: 0; }
+  .segmented label:has(input:checked) { background: #fff; color: var(--navy); }
+  .segmented label:has(input:focus-visible) { outline: 2px solid var(--cyan); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .btn { width: 100%; margin-top: 0.25rem; padding-block: 1.1rem; }
+  .note { font-size: 0.8rem; color: rgb(255 255 255 / 0.55); text-align: center; }
+  .note a { color: rgb(255 255 255 / 0.75); }
+  @media (max-width: 26rem) { .row { grid-template-columns: 1fr; } .segmented { grid-template-columns: repeat(2, 1fr); } }
+</style>

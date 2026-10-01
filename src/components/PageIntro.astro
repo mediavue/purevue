@@ -1,0 +1,29 @@
+---
+// Dark navy band at the top of inner pages, so the white header stays readable
+interface Props {
+  label: string;
+  title: string;
+}
+const { label, title } = Astro.props;
+---
+
+<section class="intro">
+  <div class="wrap">
+    <span class="label">{label}</span>
+    <h1>{title}</h1>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .intro {
+    color: #fff;
+    background:
+      radial-gradient(50rem 30rem at 90% 120%, rgb(26 92 255 / 0.5), transparent 60%),
+      linear-gradient(180deg, #06102a, var(--navy));
+    padding-block: calc(9rem + env(safe-area-inset-top, 0px)) clamp(3rem, 7vw, 5rem);
+  }
+  .label { color: var(--cyan); }
+  h1 { font-size: clamp(2.6rem, 1.6rem + 4vw, 4.8rem); font-weight: 800; margin-top: 1rem; max-width: 50rem; }
+  .intro :global(p) { color: rgb(255 255 255 / 0.78); font-size: 1.2rem; margin-top: 1.25rem; max-width: 38rem; }
+</style>

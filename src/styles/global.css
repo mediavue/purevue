@@ -1,0 +1,102 @@
+/* Fonts are stored with the site (faster, and no visitor data is sent to Google). */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+/* Brand colours come from the PureVue logo. Light sections switch to navy in dark mode. */
+:root {
+  --navy: #071330;
+  --navy-2: #0d1f4a;
+  --royal: #1a5cff;      /* the "P" in the logo */
+  --cyan: #1fb0dc;       /* "ure vue" in the logo */
+  --glass: rgb(255 255 255 / 0.08);
+  --glass-line: rgb(255 255 255 / 0.16);
+
+  --bg: #f3f7fc;
+  --surface: #ffffff;
+  --ink: #0a1633;
+  --muted: #4f5d7a;
+  --line: #dde5f0;
+
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --max: 76rem;
+  --r-lg: 1.75rem;
+  --r-md: 1.1rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #081534;
+    --surface: #0f2152;
+    --ink: #eef3fb;
+    --muted: #a9b7d3;
+    --line: #1f336a;
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+/* Astro wraps responsive images in <picture>; let the <img> inside size itself to the parent */
+picture { display: contents; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; border-radius: 8px; }
+
+.wrap { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
+.label {
+  font: 600 0.8rem/1 var(--f-body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--royal);
+}
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 1rem 1.6rem; border-radius: 999px; border: 0;
+  font: 650 1rem/1 var(--f-body); text-decoration: none; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.btn svg { width: 1.1em; height: 1.1em; flex: none; }
+.btn-royal { background: var(--royal); color: #fff; box-shadow: 0 10px 30px -10px rgb(26 92 255 / 0.8); }
+.btn-royal:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgb(26 92 255 / 0.9); }
+.btn-glass { background: var(--glass); color: #fff; border: 1px solid var(--glass-line); backdrop-filter: blur(10px); }
+.btn-glass:hover { background: rgb(255 255 255 / 0.14); }
+.btn-white { background: #fff; color: var(--navy); }
+.btn-white:hover { transform: translateY(-2px); }
+
+/* ---------- Sections ---------- */
+.section { padding-block: clamp(4.5rem, 10vw, 8rem); }
+.section-head { display: grid; gap: 1rem; max-width: 44rem; margin-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+.section-head h2 { font-size: clamp(2.2rem, 1.4rem + 3.4vw, 4rem); font-weight: 780; }
+.section-head p { font-size: 1.15rem; color: var(--muted); max-width: 36rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}

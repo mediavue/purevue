@@ -1,0 +1,97 @@
+---
+import { Picture } from "astro:assets";
+import highStreet from "../assets/images/high-street.jpg";
+import { towns, coveredPostcodes } from "../data/business";
+
+// The ticker repeats the town list twice so it can loop without a gap
+const tickerTowns = [...towns, ...towns];
+---
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {tickerTowns.map((town) => <span>{town.name}</span>)}
+  </div>
+</div>
+
+<section class="section areas" id="areas">
+  <figure class="wrap street">
+    <Picture
+      src={highStreet}
+      formats={["avif", "webp"]}
+      widths={[700, 1200, 2000]}
+      sizes="(max-width: 76rem) 100vw, 76rem"
+      alt="Sunny market town high street with timber-framed and Georgian buildings"
+    />
+  </figure>
+  <div class="wrap cols">
+    <div class="section-head">
+      <span class="label">Areas we cover</span>
+      <h2>On your street, every month.</h2>
+      <p>We run regular rounds across north Essex and south Suffolk. Nearby but not listed? Ask us anyway.</p>
+    </div>
+    <div>
+      <ul class="towns">
+        {towns.map((town) => <li>{town.name} <small>{town.postcode}</small></li>)}
+      </ul>
+      <form class="checker" id="postcode-form" data-covered={coveredPostcodes.join(",")}>
+        <label for="postcode">Are you on our round?</label>
+        <div class="row">
+          <input id="postcode" name="postcode" autocomplete="postal-code" placeholder="Enter your postcode" required />
+          <button class="btn btn-royal" type="submit">Check</button>
+        </div>
+        <output id="postcode-result" for="postcode" aria-live="polite"></output>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Postcode checker: compares the first half of the postcode with the areas we cover
+  const form = document.getElementById("postcode-form") as HTMLFormElement | null;
+  const input = document.getElementById("postcode") as HTMLInputElement | null;
+  const result = document.getElementById("postcode-result");
+
+  if (form && input && result) {
+    const covered = (form.dataset.covered ?? "").split(",");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const raw = input.value.toUpperCase().replace(/\s+/g, "");
+      const area = raw.length > 4 ? raw.slice(0, -3) : raw; // "CM71AB" -> "CM7"
+      if (!/^[A-Z]{1,2}\d/.test(area)) {
+        result.textContent = "That doesn't look like a UK postcode. Try something like CM7 1AB.";
+      } else if (covered.includes(area)) {
+        result.textContent = `Yes, ${area} is on our round. Get a free quote at the top of the page.`;
+      } else {
+        result.textContent = `${area} isn't on a regular round yet, but call or text and we'll see what we can do.`;
+      }
+    });
+  }
+</script>
+
+<style>
+  .ticker { background: var(--royal); color: #fff; overflow: hidden; padding-block: 1.25rem; }
+  .ticker-track { display: flex; width: max-content; animation: ticker 40s linear infinite; }
+  .ticker-track span { font: 750 clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem)/1 var(--f-display); letter-spacing: -0.03em; padding-inline: 1.5rem; white-space: nowrap; }
+  .ticker-track span::after { content: "•"; margin-left: 3rem; color: rgb(255 255 255 / 0.45); }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+
+  .street { border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 21 / 8; max-width: 100%; margin-block: 0 clamp(2.5rem, 5vw, 4rem); }
+  .street :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .cols .section-head { margin-bottom: 0; }
+  .towns { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+  .towns li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 0.25rem; border-bottom: 1px solid var(--line); font-weight: 600; font-size: 1.1rem; }
+  .towns li:nth-child(odd) { padding-right: 1.5rem; }
+  .towns li:nth-child(even) { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+  .towns small { color: var(--muted); font-weight: 500; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+  .checker { margin-top: 2.25rem; padding: 1.5rem; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); display: grid; gap: 0.75rem; }
+  .checker label { font-weight: 650; }
+  .row { display: flex; gap: 0.5rem; }
+  .checker input { flex: 1; min-width: 0; font: inherit; color: var(--ink); padding: 0.85rem 1.1rem; border-radius: 999px; border: 1.5px solid var(--line); background: var(--bg); text-transform: uppercase; }
+  .checker input::placeholder { text-transform: none; }
+  .checker input:focus { outline: none; border-color: var(--royal); }
+  output { color: var(--muted); min-height: 1.6em; }
+  @media (max-width: 52rem) { .cols { grid-template-columns: minmax(0, 1fr); } .street { aspect-ratio: 16 / 9; } }
+  @media (max-width: 26rem) { .towns { grid-template-columns: 1fr; } .towns li:nth-child(n) { padding-inline: 0.25rem; border-left: 0; } }
+  @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+</style>

@@ -1,0 +1,78 @@
+---
+import { Picture } from "astro:assets";
+import purityMeter from "../assets/images/purity-meter.jpg";
+import brushOnGlass from "../assets/images/brush-on-glass.jpg";
+import rinse from "../assets/images/rinse.jpg";
+
+const steps = [
+  {
+    title: "Filter",
+    text: "Tap water is filtered until every mineral is gone. Pure water dries clear, without spots or streaks.",
+    image: purityMeter,
+    alt: "Water purity meter reading 000 in front of a filtration unit",
+  },
+  {
+    title: "Scrub",
+    text: "We scrub the glass and frames from the ground with a soft brush on a water-fed pole.",
+    image: brushOnGlass,
+    alt: "Water-fed pole brush scrubbing a window",
+  },
+  {
+    title: "Rinse",
+    text: "A final rinse carries the dirt away. The windows dry naturally to a clear finish.",
+    image: rinse,
+    alt: "Clean water rinsing down a window pane in the sun",
+  },
+];
+---
+
+<section class="section how" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">How pure water cleaning works</span>
+      <h2>Cleaner windows that stay clean for longer.</h2>
+      <p>No soap means no sticky film left behind for dirt to cling to.</p>
+    </div>
+    <ol class="steps">
+      {steps.map((step, i) => (
+        <li>
+          <figure>
+            <Picture
+              src={step.image}
+              formats={["avif", "webp"]}
+              widths={[400, 700, 1000]}
+              sizes="(max-width: 52rem) 100vw, 25rem"
+              alt={step.alt}
+            />
+          </figure>
+          <span class="n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+    <ul class="no-ladder" aria-label="Benefits of not using ladders">
+      <li>No ladder marks on your lawn</li>
+      <li>No one walking on your roof tiles</li>
+      <li>No damage to window ledges</li>
+      <li>No chemicals near children, pets or plants</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .how { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+  .how::before { content: ""; position: absolute; inset: auto -20% -60% 30%; height: 40rem; background: radial-gradient(closest-side, rgb(26 92 255 / 0.35), transparent); pointer-events: none; }
+  .how .section-head p { color: rgb(255 255 255 / 0.7); }
+  .how .label { color: var(--cyan); }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; position: relative; }
+  .steps li { border-top: 1px solid var(--glass-line); padding-top: 1.75rem; display: grid; gap: 0.75rem; align-content: start; }
+  figure { margin: 0 0 0.75rem; border-radius: var(--r-md); overflow: hidden; aspect-ratio: 4 / 3; max-width: 100%; }
+  figure :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .n { font: 800 4.5rem/0.8 var(--f-display); letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.35); }
+  h3 { font-size: 1.6rem; font-weight: 720; }
+  .steps p { color: rgb(255 255 255 / 0.7); }
+  .no-ladder { margin: clamp(3rem, 6vw, 4.5rem) 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; position: relative; }
+  .no-ladder li { padding: 0.65rem 1.1rem; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-line); font-size: 0.95rem; }
+  @media (max-width: 52rem) { .steps { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import logoMark from "../assets/images/logo-mark.png";
+import PhoneIcon from "./PhoneIcon.astro";
+import { business } from "../data/business";
+---
+
+<header class="site-header" id="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="PureVue Window Cleaning, home">
+      <Image src={logoMark} alt="PureVue" width={112} loading="eager" />
+      <span>Window<br />Cleaning</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#every-visit">Every visit</a>
+      <a href="/#how">Pure water</a>
+      <a href="/#areas">Areas</a>
+      <a href={business.directDebit} rel="noopener">Pay by Direct Debit</a>
+    </nav>
+    <a class="btn btn-glass call" href={business.phoneLink}>
+      <PhoneIcon />
+      <span class="num">{business.phoneDisplay}</span>
+      <span class="visually-hidden">Call us</span>
+    </a>
+  </div>
+</header>
+
+<script>
+  // The header is see-through over the hero, then turns solid once you scroll
+  const header = document.getElementById("site-header");
+  if (header) {
+    const update = () => header.classList.toggle("scrolled", window.scrollY > 40);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: fixed; inset: 0 0 auto; z-index: 40;
+    padding-top: env(safe-area-inset-top, 0px);
+    transition: background-color .3s ease, box-shadow .3s ease;
+  }
+  .site-header.scrolled { background: rgb(7 19 48 / 0.82); backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 1px 0 var(--glass-line); }
+  .wrap { display: flex; align-items: center; gap: 2rem; padding-block: 1rem; }
+  .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #fff; }
+  .brand img { height: 2.6rem; width: auto; }
+  .brand span { font: 600 0.72rem/1.2 var(--f-body); letter-spacing: 0.18em; text-transform: uppercase; color: rgb(255 255 255 / 0.7); }
+  .nav { display: flex; gap: 1.75rem; margin-left: auto; }
+  .nav a { color: rgb(255 255 255 / 0.78); text-decoration: none; font-weight: 500; font-size: 0.97rem; }
+  .nav a:hover { color: #fff; }
+  .call { padding: 0.75rem 1.2rem; font-size: 0.95rem; }
+  @media (max-width: 60rem) { .nav { display: none; } .call { margin-left: auto; } }
+  @media (max-width: 30rem) { .brand span { display: none; } .call .num { display: none; } }
+</style>

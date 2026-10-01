@@ -1,0 +1,179 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { business } from "../data/business";
+---
+
+<section class="hero">
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="pill"><span class="dot"></span>Local window cleaner for Essex &amp; Suffolk</span>
+      <h1>Crystal clear windows. Just <em>pure water.</em></h1>
+      <p class="lede">Monthly window cleaning for homes in Braintree, Dunmow, Haverhill, Halstead and the villages in between. Frames, sills and doors included, every visit.</p>
+      <div class="ctas">
+        <a class="btn btn-royal" href="#quote">Get my free quote</a>
+        <a class="btn btn-glass" href={business.phoneLink}>Call {business.phoneDisplay}</a>
+      </div>
+      <ul class="stats">
+        <li><b>0 ppm</b><span>Pure water, nothing added</span></li>
+        <li><b>100%</b><span>Re-clean guarantee</span></li>
+        <li><b>Monthly</b><span>Regular rounds</span></li>
+      </ul>
+    </div>
+    <QuoteForm />
+  </div>
+</section>
+
+<script>
+  // Rain on glass: water droplets sitting on a window, with a few bigger drops
+  // slowly running down. Drawn in code, so it stays sharp on any screen.
+  const canvas = document.getElementById("rain") as HTMLCanvasElement | null;
+  const ctx = canvas?.getContext("2d");
+
+  if (canvas && ctx) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    type Drop = { x: number; y: number; r: number; stretch: number };
+    type Runner = { x: number; y: number; r: number; speed: number; trail: Drop[] };
+    let width = 0, height = 0, running = true;
+    let drops: Drop[] = [];
+    let runners: Runner[] = [];
+
+    // Repeatable random numbers, so the droplet pattern looks the same on every visit
+    let seed = 11;
+    const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+    function setup() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas!.offsetWidth;
+      height = canvas!.offsetHeight;
+      canvas!.width = width * dpr;
+      canvas!.height = height * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      seed = 11;
+      drops = [];
+      const count = Math.round((width * height) / 2600);
+      for (let i = 0; i < count; i++) {
+        // Mostly tiny drops, with the odd larger one
+        const r = random() < 0.92 ? 0.8 + random() * 2.6 : 4 + random() * 6;
+        drops.push({ x: random() * width, y: random() * height, r, stretch: 1 + random() * 0.25 });
+      }
+      runners = [];
+      for (let i = 0; i < Math.max(4, Math.round(width / 160)); i++) {
+        runners.push({ x: random() * width, y: random() * height, r: 5 + random() * 4, speed: 0.15 + random() * 0.5, trail: [] });
+      }
+    }
+
+    function drawDrop(x: number, y: number, r: number, stretch: number) {
+      const c = ctx!;
+      c.save();
+      c.translate(x, y);
+      c.scale(1, stretch);
+      // Body: bright rim, like light bending through water
+      const body = c.createRadialGradient(-r * 0.25, -r * 0.35, r * 0.1, 0, 0, r);
+      body.addColorStop(0, "rgba(180, 225, 255, 0.10)");
+      body.addColorStop(0.7, "rgba(120, 180, 255, 0.10)");
+      body.addColorStop(1, "rgba(200, 235, 255, 0.45)");
+      c.fillStyle = body;
+      c.beginPath();
+      c.arc(0, 0, r, 0, Math.PI * 2);
+      c.fill();
+      // Shadow under the drop
+      c.strokeStyle = "rgba(0, 8, 30, 0.35)";
+      c.lineWidth = Math.max(0.6, r * 0.18);
+      c.beginPath();
+      c.arc(0, r * 0.08, r * 0.92, Math.PI * 0.15, Math.PI * 0.85);
+      c.stroke();
+      // Highlight
+      if (r > 1.6) {
+        c.fillStyle = "rgba(255, 255, 255, 0.75)";
+        c.beginPath();
+        c.ellipse(-r * 0.35, -r * 0.4, r * 0.22, r * 0.14, -0.6, 0, Math.PI * 2);
+        c.fill();
+      }
+      c.restore();
+    }
+
+    function frame() {
+      const c = ctx!;
+      c.clearRect(0, 0, width, height);
+      for (const d of drops) drawDrop(d.x, d.y, d.r, d.stretch);
+
+      for (const run of runners) {
+        if (!reduceMotion) {
+          // Drops on glass move in small, uneven bursts
+          run.y += run.speed * (0.4 + Math.random() * 1.6);
+          run.x += (Math.random() - 0.5) * 0.3;
+          if (Math.random() < 0.04) run.trail.push({ x: run.x + (Math.random() - 0.5) * 2, y: run.y - run.r, r: 0.8 + Math.random() * 1.4, stretch: 1.1 });
+          if (run.trail.length > 40) run.trail.shift();
+          if (run.y - run.r > height) {
+            run.y = -20;
+            run.x = Math.random() * width;
+            run.trail = [];
+          }
+        }
+        // A faint clear path where the drop has run
+        c.strokeStyle = "rgba(160, 210, 255, 0.06)";
+        c.lineWidth = run.r * 1.2;
+        c.lineCap = "round";
+        c.beginPath();
+        c.moveTo(run.x, Math.max(0, run.y - 140));
+        c.lineTo(run.x, run.y);
+        c.stroke();
+        for (const t of run.trail) drawDrop(t.x, t.y, t.r, t.stretch);
+        drawDrop(run.x, run.y, run.r, 1.25);
+      }
+      if (!reduceMotion && running) requestAnimationFrame(frame);
+    }
+
+    setup();
+    frame();
+    new ResizeObserver(() => {
+      setup();
+      if (reduceMotion || !running) frame();
+    }).observe(canvas);
+
+    // Pause the animation when the hero is scrolled out of view (saves battery)
+    new IntersectionObserver(([entry]) => {
+      const wasRunning = running;
+      running = entry.isIntersecting;
+      if (running && !wasRunning && !reduceMotion) requestAnimationFrame(frame);
+    }).observe(canvas);
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    color: #fff;
+    background:
+      radial-gradient(60rem 40rem at 85% 110%, rgb(26 92 255 / 0.55), transparent 60%),
+      radial-gradient(40rem 30rem at 10% -10%, rgb(31 176 220 / 0.28), transparent 60%),
+      linear-gradient(180deg, #06102a 0%, var(--navy) 55%, #0a1c4a 100%);
+    padding-block: calc(7.5rem + env(safe-area-inset-top, 0px)) 4.5rem;
+  }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.45rem 0.9rem 0.45rem 0.55rem; border-radius: 999px;
+    background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(8px);
+    font-size: 0.9rem; color: rgb(255 255 255 / 0.9);
+  }
+  .dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #3ee08f; box-shadow: 0 0 0 4px rgb(62 224 143 / 0.2); }
+  h1 { font-size: clamp(2.9rem, 1.6rem + 5.6vw, 6.2rem); font-weight: 800; margin-block: 1.4rem 1.5rem; }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(100deg, #7fdcff 0%, var(--cyan) 40%, #5d8bff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: clamp(1.08rem, 1rem + 0.4vw, 1.3rem); color: rgb(255 255 255 / 0.78); max-width: 36rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2.25rem; }
+  .stats { display: flex; flex-wrap: wrap; gap: 1rem 2.75rem; margin: 3rem 0 0; padding: 1.75rem 0 0; border-top: 1px solid var(--glass-line); list-style: none; }
+  .stats b { display: block; font: 750 2rem/1 var(--f-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .stats span { font-size: 0.9rem; color: rgb(255 255 255 / 0.65); }
+  @media (max-width: 62rem) {
+    .wrap { grid-template-columns: minmax(0, 1fr); }
+    .wrap > :global(.quote-card) { max-width: 34rem; }
+  }
+</style>

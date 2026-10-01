@@ -1,0 +1,72 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ActionBar from "../components/ActionBar.astro";
+import { business, towns } from "../data/business";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Hide the big call-to-action panel above the footer (e.g. on the thank-you page) */
+  showCta?: boolean;
+  /** Ask search engines not to list this page */
+  noindex?: boolean;
+}
+
+const { title, description, showCta = true, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og-image.jpg", Astro.site);
+
+// Business details in the format Google reads for local search results
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: business.name,
+  telephone: business.phoneInternational,
+  email: business.email,
+  url: business.url,
+  image: ogImage.href,
+  areaServed: towns.map((town) => town.name),
+  sameAs: [business.facebook],
+};
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#071330" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href="/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- How the page looks when shared on Facebook, WhatsApp etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+  </head>
+  <body>
+    <Header />
+    <main id="top">
+      <slot />
+    </main>
+    <Footer showCta={showCta} />
+    <ActionBar />
+  </body>
+</html>

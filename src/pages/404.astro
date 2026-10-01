@@ -1,0 +1,19 @@
+---
+import Base from "../layouts/Base.astro";
+import PageIntro from "../components/PageIntro.astro";
+---
+
+<Base
+  title="Page not found | PureVue Window Cleaning"
+  description="Sorry, we couldn't find that page."
+  noindex
+>
+  <PageIntro label="Page not found" title="Sorry, that page isn't here.">
+    <p>It may have moved when we updated the website. Everything you need is on the home page.</p>
+  </PageIntro>
+  <section class="section">
+    <div class="wrap">
+      <a class="btn btn-royal" href="/">Go to the home page</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { business } from "../data/business";
+---
+
+<Base
+  title="Thanks for your quote request | PureVue Window Cleaning"
+  description="We've received your quote request and will be in touch soon."
+  showCta={false}
+  noindex
+>
+  <PageIntro label="Quote request sent" title="Thanks, we've got your details.">
+    <p>We'll text you a price, usually the same day. Need us sooner? Call or text {business.phoneDisplay}.</p>
+  </PageIntro>
+  <section class="section">
+    <div class="wrap next">
+      <a class="btn btn-royal" href="/">Back to the home page</a>
+      <a class="btn btn-outline" href={business.directDebit} rel="noopener">Set up Direct Debit</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .next { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn-outline { border: 1.5px solid var(--line); color: var(--ink); background: var(--surface); }
+</style>

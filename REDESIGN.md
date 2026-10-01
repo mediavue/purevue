@@ -1,7 +1,7 @@
 # PureVue website redesign
 
-A proposal for a new purevuewindows.co.uk, with a working prototype in `index.html`.
-Open `index.html` in any browser to see it. It needs no install or build step.
+Why and how purevuewindows.co.uk was redesigned. The new site is built and ready to deploy:
+see [README.md](README.md) for how to run it and put it live.
 
 ## What the current site does well
 
@@ -21,6 +21,7 @@ Open `index.html` in any browser to see it. It needs no install or build step.
 | Typos | "tusing ladders", "Need you windows cleaned?" | Small, but they make a cleaning business look less careful. |
 | Weak mobile actions | No call button that stays on screen while scrolling. | Most visitors are on phones and want to call in one tap. |
 | Unrelated footer links | Links to window cleaners in Saffron Walden, Whitehaven and Caithness, plus scrim suppliers. | Sends customers to other businesses and confuses Google about where PureVue works. |
+| Broken pages | The **Payments** menu link and the **Privacy Policy** footer link both lead to "Page not found". | Customers can't find how to pay, and a site that collects details needs a working privacy policy. |
 | Missing local SEO | No structured business data, no postcodes. | Harder to appear for "window cleaner Braintree" searches. |
 
 ## The redesign
@@ -50,49 +51,44 @@ for a price without scrolling.
 All the wording is rewritten from the current site's own claims. Nothing has been invented
 (no fake reviews, no prices).
 
-## Recommended technology
+## Technology
 
-The prototype is a single HTML file so it's easy to open and read. For the real site I'd recommend:
+The site is built with:
 
-| Need | Recommendation | Why |
+| Part | Choice | Why |
 | --- | --- | --- |
-| Site framework | **[Astro](https://astro.build)** | Builds plain, very fast HTML pages. Ideal for small business sites. Easy to add pages later (e.g. one page per town for local SEO). |
-| Styling | Modern CSS (as in the prototype) or **Tailwind CSS v4** | No heavy theme or page builder. |
-| Hosting | **Cloudflare Pages** or **Netlify** | Free for a site this size, fast worldwide, automatic HTTPS, deploys every time you push to GitHub. |
-| Quote form | **Netlify Forms**, **Formspree** or a Cloudflare Worker | Sends form entries to `info@purevuewindows.co.uk` with no server to maintain. |
-| Images | WebP/AVIF, resized per screen | The photo in this prototype is already converted to WebP and is about 5x smaller than the original. |
-| Photography | Real photos of real jobs | The prototype now uses 7 AI-generated images (see below) as stand-ins. Before launch, replace them with real photos of PureVue jobs, the van and before/after shots. |
-| Payments | Keep the existing GoCardless link | Already works; no change needed. |
-| Local SEO | `LocalBusiness` structured data (included in the prototype), a Google Business Profile, a page per town | Helps PureVue show up in Google Maps and local searches. |
+| Site framework | **[Astro](https://astro.build)** | Builds plain, very fast HTML pages. Ideal for small business sites, and easy to add pages later (e.g. one page per town for local SEO). |
+| Styling | Modern CSS, no theme or page builder | Small, fast and easy to change. |
+| Hosting | **Netlify** | Free for a site this size, fast worldwide, automatic HTTPS, goes live every time changes are pushed to GitHub. |
+| Quote form | **Netlify Forms** | Emails each request to `info@purevuewindows.co.uk` with no server to maintain. Includes a spam trap. |
+| Images | Astro image optimisation | Every photo is automatically resized and converted to AVIF and WebP, so phones download small files (often 40–150 KB instead of 500–750 KB). |
+| Photography | Real photos of real jobs (to do) | The site uses 7 AI-generated images as stand-ins (see below). Replace them with real photos of PureVue jobs, the van and before/after shots when possible. |
+| Payments | Existing GoCardless link | Already works. The old `/payments` address now redirects there. |
+| Local SEO | Business details for Google, sitemap, page titles and descriptions, sharing image | Helps PureVue show up in local searches. Next steps: a Google Business Profile and a page per town. |
 
-Modern browser features already used in the prototype: `backdrop-filter` frosted glass,
-the `:has()` selector, variable fonts, a `<canvas>` animation, automatic dark mode for the
-light sections, and structured business data for Google. Motion is switched off for visitors
-who ask their device for reduced motion.
+Browser features used: `backdrop-filter` frosted glass, the `:has()` selector, variable fonts,
+a `<canvas>` animation, automatic dark mode for the light sections, and lazy-loaded responsive
+images. Motion is switched off for visitors who ask their device for reduced motion.
 
 ## Images
 
+All images are in `src/assets/images/`.
+
 | File | Source | Used for |
 | --- | --- | --- |
-| `cleaner-at-work.webp` | Real photo from the current site | Large "Cleaned from the ground" tile |
-| `logo.png`, `logo-mark-transparent.png` | Current PureVue logo | Header and footer |
-| `conservatory.webp` | AI-generated (GPT Image 2.5 via Higgsfield) | "Above conservatories" tile |
-| `georgian-window.webp` | AI-generated | "Georgian and leaded" tile |
-| `purity-meter.webp` | AI-generated | Step 1, Filter |
-| `brush-on-glass.webp` | AI-generated | Step 2, Scrub |
-| `rinse.webp` | AI-generated | Step 3, Rinse |
-| `house-front.webp` | AI-generated | Guarantee section |
-| `high-street.webp` | AI-generated | Areas banner |
+| `cleaner-at-work.jpg` | Real photo from the current site | Large "Cleaned from the ground" tile |
+| `logo-mark.png` | Current PureVue logo | Header and footer |
+| `conservatory.jpg` | AI-generated (GPT Image 2.5 via Higgsfield) | "Above conservatories" tile |
+| `georgian-window.jpg` | AI-generated | "Georgian and leaded" tile |
+| `purity-meter.jpg` | AI-generated | Step 1, Filter |
+| `brush-on-glass.jpg` | AI-generated | Step 2, Scrub |
+| `rinse.jpg` | AI-generated | Step 3, Rinse |
+| `house-front.jpg` | AI-generated | Guarantee section |
+| `high-street.jpg` | AI-generated | Areas banner |
 
 The AI images show general scenes only (no people, no named places), so they don't claim to be
 PureVue's own work. They're fine as placeholders, but real photos of real jobs build more trust.
 
 ## Before going live
 
-- [ ] Confirm the correct phone number (`07507 677222` vs `07889 868568`).
-- [ ] Connect the quote form to a real form service (it currently only shows a summary on screen).
-- [ ] Ask existing customers for Google reviews and add a reviews section.
-- [ ] Replace the AI-generated images with real photos of PureVue jobs where possible.
-- [ ] Decide whether to show starting prices (e.g. "from £X for a 3-bed semi").
-- [ ] Keep or move the privacy policy page (the footer links to `/privacy-policy`).
-- [ ] Set up redirects from old WordPress URLs (`/contact`, `/payments`) so Google links keep working.
+See the checklist at the end of [README.md](README.md).
